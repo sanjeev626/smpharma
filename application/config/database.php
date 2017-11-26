@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 //echo $_SERVER['HTTP_HOST'];
-if($_SERVER['HTTP_HOST']=="smpharma.dev" || $_SERVER['HTTP_HOST']=="127.0.0.1")
+if($_SERVER['HTTP_HOST']=="sm.pharma" || $_SERVER['HTTP_HOST']=="127.0.0.1")
 {
 	$username = "root";
 	$password = "";
