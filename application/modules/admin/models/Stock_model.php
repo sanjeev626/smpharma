@@ -236,14 +236,14 @@ class stock_model extends CI_Model {
 
     public function get_suppliername_by_stock_id($stock_id){
         $this->db->select('sup.fullname');
-        $this->db->join('tbl_creditmemo tc','tc.id','tbl_stock.creditmemo_id');
-        $this->db->join('tbl_supplier sup','sup.id','tc.distributor_id');
+        $this->db->join('tbl_creditmemo tc','tc.id = tbl_stock.creditmemo_id');
+        $this->db->join('tbl_supplier sup','sup.id = tc.distributor_id');
         $this->db->where('tbl_stock.id',$stock_id);
         $q = $this->db->get($this->table_stock);
-        echo $this->db->last_query();
+        //echo $this->db->last_query();
         $data1 = $q->result_array();
         $data = array_shift($data1);
-        return $data[$field];
+        return $data['fullname'];
     }
 
     function getStockMedicine($medicine_id)

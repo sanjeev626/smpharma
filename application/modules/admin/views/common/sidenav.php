@@ -17,6 +17,7 @@
           <ul class="treeview-menu">
             <li class="<?php if($this->uri->segment(3) == ''){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock"><i class="fa fa-circle-o"></i> All</a></li>
             <li class="<?php if($this->uri->segment(3) == 'near_expiry'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock/near_expiry"><i class="fa fa-circle-o"></i> Near Expiry</a></li>
+            <li class="<?php if($this->uri->segment(3) == 'expired'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock/expired"><i class="fa fa-circle-o"></i> Expired</a></li>
           </ul>
         </li>
         <li class ="<?php if($nav == 'stock'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/sale"><i class="fa fa-edit"></i><span>SALE</span></a></li>
