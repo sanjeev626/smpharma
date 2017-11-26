@@ -25,7 +25,7 @@ date_default_timezone_set("Asia/Kathmandu");
 */
 if($_SERVER['HTTP_HOST']=="sm.pharma" || $_SERVER['HTTP_HOST']=="127.0.0.1")
 {
-	$config['base_url'] = 'sm.pharma';
+	$config['base_url'] = 'http://sm.pharma';
 }
 else
 {	

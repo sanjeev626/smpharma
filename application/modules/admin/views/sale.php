@@ -71,7 +71,7 @@ if (!empty($stock_detail)) {
             <label class="col-sm-1 text-center">Stock</label>
         </div>
         <?php 
-        for($i=0;$i<2;$i++){
+        for($i=0;$i<10;$i++){
         $j=$i+1;
         ?>
         <div class="form-group">
