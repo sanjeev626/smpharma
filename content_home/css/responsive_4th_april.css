@@ -1,0 +1,708 @@
+.clearfix {
+*zoom:1
+}
+.clearfix:before, 
+.clearfix:after {
+	display: table;
+	content: "";
+	line-height: 0
+}
+.clearfix:after {
+	clear: both
+}
+
+
+@media (min-width: 1024px) and (max-width: 1400px) {
+
+.brand-logo{
+	margin-left: 0;
+}
+
+}
+
+@media (min-width: 1400px) {
+
+.seekerlogin-left::after {
+    width: 48.8%;
+}
+.seekerlogin-left::before {
+    width: 49.8%;
+}
+
+}
+
+
+@media (max-width: 1024px) {
+
+.search-box .btn-default{
+    padding: 0 15px;
+}
+.brand-logo{
+	margin-left: 0;
+}
+.login-btn{
+	margin-right: 0;
+}
+
+.styled-select {
+    background-position: 81%;
+}
+
+.video-info p {
+   font-size: 13px;
+}
+.login-btn{
+    margin-right: 0;
+}
+.job-seeker-form .jobseeker-left-aside .col-md-2, .job-seeker-form .jobseeker-left-aside .col-md-3, .job-seeker-form .jobseeker-left-aside .col-md-4, .job-seeker-form .jobseeker-left-aside .col-md-5, .job-seeker-form .jobseeker-left-aside .col-md-6, .job-seeker-form .jobseeker-left-aside .col-md-10{
+    width: 100%;
+}
+.jobseeker-left-aside .styled-select{
+    background-position: 95%;
+}
+.employeer-login-page .seekerlogin .col-md-6 {
+    width: 100%;
+}
+.employeer-login-page .seekerlogin-wrap{
+    margin-bottom: 100px;
+}
+.query {
+    padding: 28px 23px 60px;
+}
+.seekerlogin-left::before {
+    left: 15px;
+    width: 45.9%;
+}
+.footer .col-md-2, .footer .col-md-3, .footer .col-md-4{
+    width: 50%;
+    float: left;
+}
+.social-net, .foot-services, .gjob {
+    margin-left: 0;
+}  
+.about-company, .share, .left-brandlogo{
+    padding: 30px 15px;
+}  
+    
+    
+}
+
+
+@media (max-width: 980px) {
+
+
+
+}
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+
+.contact-info{
+    display: none;
+}
+.responsive-contact{
+    display: block;
+     margin-right: 15px;
+}
+
+.navbar-header {
+    margin-left: 15px;
+    float: none;
+}
+header .navbar-toggle {
+	display: block;
+	margin-right:0;
+	float: none !important;
+	}
+header .navbar-collapse {
+	border-top: 1px solid #ccc;
+	float: none;
+	}
+
+header .navbar-collapse.collapse {
+	display: none!important;
+	}
+header .collapse.in{
+	display:block !important;
+	float: none;
+	}
+
+.navbar-nav > li {
+    float: none;
+}
+
+.navbar-right{
+	float:none !important;
+	margin: 15px 0  15px -15px;
+}
+.navbar-nav>li>a{
+	padding-left:0;
+}
+.navbar-nav li{
+    border-bottom: 1px solid transparent;
+}
+.navbar-default .navbar-toggle:hover {
+    background: #F39114;
+}
+.navbar-default .navbar-toggle:hover .icon-bar{
+	background-color:#fff;
+}
+ul.nav.navbar-nav li:hover{
+    border-bottom: 1px solid #29b6f6;
+}
+.nav.navbar-nav {
+    width: 100%;
+}
+.navbar-nav {
+    margin: 7.5px 0px;
+}
+.contact-info {
+    margin-top: -35px;
+}
+
+.employer-login{
+	float: none !important;
+	margin-top: 20px;
+}
+.search-box {
+    margin: 0 0 15px 0;
+}
+
+.left-aside, .job-list{
+	margin-bottom: 30px;
+}
+section.interview img, section.capsule img {
+    width: 100%;
+}
+.p-space {
+    padding-left: 50px;
+}
+section.testimonials iframe {
+    height: 100%;
+}
+section.testimonials .vieo {
+    margin-bottom: 20px;
+}
+
+section.testimonials .vieo:after {
+    bottom: -12px;
+}
+.vieo .row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.vieo {
+    margin: 0 -15px;
+}
+.employer-login {
+     position: absolute;
+     bottom: 40px;
+     right: 15px;
+ }
+.job-seeker-form .employer-login {
+    bottom: 0px;
+}
+p.term, .col-md-12{
+    /* clear: both; */
+}
+.employer-login {
+    position: absolute;
+    bottom: 46px;
+    right: 15px;
+    float: none;
+}
+.job-seeker-form .employer-login {
+    bottom: 0px;
+}
+.seekerlogin-left {
+    margin: 0 0 80px 30px;
+}
+.seekerlogin-left::before {
+    left: 15px;
+    width: 49.4%;
+}
+.seekerlogin-left::after {
+    width: 47.6%;
+}
+#myCarousel3 {
+    margin-right: 0;
+}
+.query {
+    padding: 28px 23px 60px;
+}
+.employeer-login-page .employer-login {
+    bottom: 0;
+}
+.seeker-login-page .carousel {
+    height: auto;
+}
+.seeker-login-page .seekerlogin {
+    padding: 30px 0 0;
+}
+
+
+.about-company, .share, .left-brandlogo{
+    padding: 30px;
+}
+.vacancies-details, .criteria-procedure, .jobdetail-page section.hunting-job {
+    padding-left: 30px;
+} 
+.jobdetail-leftaside{
+    margin-bottom: 30px;
+}
+    
+header.jobdetails-hed {
+    height: 140px;
+} 
+.normalwrap{
+    margin-bottom: 30px;
+} 
+#vertical-horizontal-scrollbar-demo .viewport {
+    width: auto;
+}    
+
+ /* new */    
+    
+.left-aside .cj-item, .hunting-job .cj-item {
+    width: 50%;
+    float: left;
+    clear: inherit !important;
+}
+.left-aside .item-info, .hunting-job .item-info {
+    min-height: 75px;
+    max-height: 75px;
+    overflow: hidden;
+    padding-left: 20px !important;
+}
+.our-client .item-info{
+    min-height: auto;
+    max-height: auto;
+}
+.gjob {
+    float: none;
+}
+    
+    
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+.contact-info{
+    display: none;
+}
+.responsive-contact{
+    display: block;
+     margin-right: 15px;
+     margin-top: -34px !important;
+}
+	
+.navbar-header {
+    margin-left: 15px;
+    float: none;
+}
+header .navbar-toggle {
+	display: block;
+	margin-right:0;
+	float: none !important;
+	}
+header .navbar-collapse {
+	border-top: 1px solid #ccc;
+	float: none;
+	}
+
+header .navbar-collapse.collapse {
+	display: none!important;
+	}
+header .collapse.in{
+	display:block !important;
+	float: none;
+	overflow-y:auto; 
+	max-height: 250px;
+   	padding-bottom: 25px; 
+	}
+.navbar-nav {
+    margin: 7.5px 0px;
+}
+.contact-info {
+    margin-top: 15px;
+}
+
+.employer-login{
+	float: none !important;
+	margin-top: 20px;
+    bottom: 46px;
+}
+.search-box {
+    margin: 0 0 15px 0;
+}
+section.interview img, section.capsule img {
+    width: 100%;
+}
+section.testimonials iframe {
+    height: 100%;
+}
+section.testimonials .vieo {
+    margin-bottom: 20px;
+}
+
+section.testimonials .vieo:after {
+    bottom: -12px;
+}
+.vieo .row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.left-aside, .job-list{
+	margin-bottom: 30px;
+}
+.vieo {
+    margin: 0 -15px;
+}
+.video-info p{
+	padding: 0 15px;
+}
+
+.employer-login {
+    position: absolute;
+    bottom: 46px;
+    right: 15px;
+    float: none;
+}
+.job-seeker-form .employer-login {
+    bottom: 0px;
+}
+.seekerlogin-left {
+    margin: 0 0 80px 30px;
+}
+.seekerlogin-left::before {
+    left: 15px;
+    width: 48.5%;
+}
+.seekerlogin-left::after {
+    width: 47.6%;
+}
+#myCarousel3 {
+    margin-right: 0;
+}
+.query {
+    padding: 28px 23px 60px;
+}
+.seekerlogin {
+    padding: 40px 0 0;
+}
+.seeker-login-page .carousel {
+    height: auto;
+}
+.employeer-login-page .employer-login {
+    bottom: 0;
+}
+.seeker-login-page .seekerlogin {
+    padding: 30px 0 0;
+}
+
+.about-company, .share, .left-brandlogo{
+    padding: 30px;
+}
+.vacancies-details, .criteria-procedure, .jobdetail-page section.hunting-job{
+    padding-left: 30px;
+} 
+.jobdetail-leftaside{
+    margin-bottom: 30px;
+}
+header.jobdetails-hed {
+    height: 140px;
+} 
+.normalwrap{
+    margin-bottom: 30px;
+}
+#vertical-horizontal-scrollbar-demo .viewport {
+    width: auto;
+}  
+.vacancies-details {
+    padding: 60px 30px 60px 30px;
+}    
+    
+.brand-logo{
+    text-align: center;
+}
+.brand-logo img{
+    display: inline-block;
+}
+
+.mid-tab .adsec{
+padding-left: 15px;
+}
+
+.mid-tab .ads{
+display: block;
+max-height :inherit;
+overflow: visible;
+}
+
+.mid-tab .ads img{
+width: 100%;
+}
+
+ /* new */    
+    
+.left-aside .cj-item, .hunting-job .cj-item {
+    width: 50%;
+    float: left;
+    clear: inherit !important;
+}
+.left-aside .item-info, .hunting-job .item-info {
+    min-height: 75px;
+    max-height: 75px;
+    overflow: hidden;
+    padding-left: 20px !important;
+}
+.our-client .item-info{
+    min-height: auto;
+    max-height: auto;
+    padding-left: 20px !important;
+
+}
+.gjob {
+    float: none;
+}
+   
+
+}
+
+
+@media (max-width: 736px) {
+
+
+
+}
+
+
+
+
+
+
+@media (max-width: 640px) {
+
+.login-btn input {
+    font-size: 9px;
+}
+.top-hed .col-xs-6, .collapse-header.affix .top-hed .col-xs-5, .collapse-header.affix .top-hed .col-xs-7{
+    width: 100%;
+}
+    
+.top-hed{
+    text-align: center;
+}
+
+.brand-logo a img{
+    display: inline-block;
+}
+.login-btn {
+    float: none;
+    margin-top: 20px;
+    display: inline-block;
+}
+
+.seekerlogin-left::after {
+    width: 46.9%;
+}
+.joboverview table tr td:first-child {
+    padding-left: 15px;
+} 
+.joboverview figure{
+    float: none;
+    display: inline-block;
+}  
+.joboverview figcaption{
+    display: block;
+}  
+.current-vacancies h2 {
+    margin: 10px 32px 15px 0;
+}    
+
+.left-aside .cj-item, .hunting-job .cj-item {
+    width: 100%;
+    float: none;
+}
+.left-aside .item-info, .hunting-job .item-info {
+    min-height: auto;
+    max-height: auto;
+    overflow: inherit;
+    padding-left: 70px !important;
+} 
+.our-client .item-info{
+    padding-left: 20px !important;
+
+}  
+    
+    
+
+}
+
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    
+
+.nav-tabs>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+}
+ul.flex-direction-nav {
+    top: -80px;
+}
+.seekerlogin .col-xs-6{
+    width: 100%;
+}
+.seekerlogin .query{
+    margin-bottom: 30px;
+}
+.footer .col-md-2, .footer .col-md-3, .footer .col-md-4 {
+    width: 100%;
+}
+.seekerlogin-left::after {
+    width: 45%;
+}
+.current-vacancies ul li{
+    display: block;
+}    
+.vacancies-details span{
+    text-align: left;
+    padding: 5px 15px;
+}
+
+
+}
+
+
+
+@media (max-width: 414px) {
+
+.styled-select{
+	background-image:none;
+}
+.nav-tabs > li{
+	float: none;
+}
+.tab-content .divider {
+    border-right: none;
+}
+.p-space {
+    padding-left: 0;
+}
+.footer-bottom {
+	text-align: center;
+}
+.footer-bottom .col-xs-6{
+	width: 100%;
+}
+p.pull-right {
+    float: none;
+    display: block;
+    width: 100%;
+}
+
+section.footer-bottom h4{
+	margin-bottom: 15px;
+}
+
+
+.search-box li:nth-child(2) {
+    border-left: none;
+    border-right: none;
+}
+.search-box li:nth-child(3) {
+    border-top: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
+    border-left: 1px solid #ebebeb;
+}
+.search-box li{
+	float: none;
+}
+.search-box .btn-default{
+	width: 100%;
+}
+.search-box .btn-default, .search-box .form-control{
+	text-align: left;	
+}
+.login-btn input#email, .login-btn input#pass, .login-btn label, .login-btn input#u_0_n {
+    width: 100%;
+}
+.login-btn {
+    margin-top: 20px;
+    display: block;
+}
+.login-btn ul li{
+    float: none;
+}
+.login-btn input#pass{
+    border-top: none;
+    border-left: 1px solid #ebebeb;
+    border-bottom: none;
+    border-right: 1px solid #ebebeb;
+}
+.login-btn input#email {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 5px;
+}
+
+.login-btn input#u_0_n{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 5px;
+}
+.employer-login{
+    position: static;
+}
+.upload input {
+    width: 100%;
+}
+#myCarousel3 .carousel-inner .item {
+    height: 283px;
+}
+.details-info .col-md-2.col-sm-3.col-xs-3 {
+    width: 100%;
+    margin-bottom: 15px;
+}
+.details-info .col-md-10.col-sm-9.col-xs-9 {
+    width: 100%;
+}
+	
+    
+    
+}
+
+
+@media (max-width: 360px) {
+
+ul.flex-direction-nav {
+    top: -54px;
+}
+.seekerlogin-left::after {
+    width: 43%;
+}
+
+
+}
+
+
+@media (max-width: 320px) {
+
+a.forget {
+    display: block;
+    float: none;
+    margin-top: 15px;
+}
+.seekerlogin-left::before, .seekerlogin-left::after{
+    height: 586px;
+}
+.seekerlogin-left::after {
+    width: 42.1%;
+}
+
+}

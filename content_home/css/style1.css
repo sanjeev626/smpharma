@@ -1,0 +1,642 @@
+.body-font{
+
+	font-family: 'Raleway';
+
+    font-size: 14px;
+
+    line-height: 30px;
+
+    font-weight: 600;
+
+}
+
+
+
+#login-detail .upload,
+
+#login-detail .profileEdit,
+
+#login-detail .resume-status{
+
+	border: 1px solid #ebebeb;
+
+    border-radius: 5px;
+
+    padding: 40px 20px;
+
+    background: #fbfbfb;
+
+}
+
+
+
+#login-detail .upload span{
+
+	    text-align: center;
+
+    display: block;
+
+        font-weight: 600;
+
+    color: #b5b4b4;
+
+}
+
+
+
+#login-detail .upload button{
+
+	background-color: #f39114;
+
+    border-color: transparent;
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    height: 30px;
+
+    padding: 0 30px;
+
+    border-radius: 3px;
+
+    margin: 15px auto;
+
+}
+
+
+
+#login-detail .profileEdit,
+
+#login-detail .resume-status{
+
+	background: none;
+
+	margin-top: 30px;
+
+
+
+}
+
+#login-detail h3{
+
+	margin-top: 0;
+
+    color: #f39114;
+
+}
+
+
+
+
+
+#login-detail .profileEdit .nav-tabs>li{
+
+    background: none;
+
+    border-bottom: 1px solid #efefef;
+
+    display: inline-block;
+
+    width: 100%;
+
+    padding: 5px 0;
+
+}
+
+#login-detail .profileEdit .nav-tabs>li i{
+
+	color: #81b524; 
+
+	padding-right: 10px;
+
+}
+
+
+
+#login-detail .profileEdit .nav-tabs>li:last-child,
+
+#login-detail .resume-status ul li:last-child{
+
+	border-bottom: none;
+
+}
+
+
+
+#login-detail .profileEdit .nav>li>a{
+
+	font-weight: 700;
+
+    font-size: 14px;
+
+    color: #636363;
+
+    border: none;
+
+    transition: color 0.5s ease;
+
+    -webkit-transition: color 0.5s ease;
+
+    -moz-transition: color 0.5s ease;
+
+}
+
+
+
+#login-detail .profileEdit .nav>li>a:hover{
+
+	background: none;
+
+	color: #81b524;
+
+}
+
+
+
+#login-detail .profileEdit .nav-tabs>li.active>a {
+
+	color: #f39114;
+
+    background: none;
+
+    box-shadow: none;
+
+    border: none;
+
+}
+
+
+
+#login-detail .profileEdit .nav-tabs>li.active::before {
+
+    content: none;
+
+
+
+}
+
+
+
+#login-detail .resume-status ul li{
+
+	 border-bottom: 1px solid #efefef;
+
+    display: inline-block;
+
+    width: 100%;
+
+	font-weight: 700;
+
+    font-size: 14px;
+
+    color: #636363;
+
+    padding: 15px 0;
+
+}
+
+
+
+#login-detail .resume-status ul li>i{
+
+	float: right;
+
+}
+
+
+
+#login-detail .resume-status ul li>.fa-times{
+
+	color: #f39114;
+
+}
+
+
+
+#login-detail .resume-status ul li>.fa-check{
+
+	color: #81b524;
+
+}
+
+
+
+
+
+/*TAB CONTENT*/
+
+#login-detail .tab-content {
+
+    background: none;
+
+    padding: 40px;
+
+    margin: 0;
+
+    border-radius: 5px;
+
+    border: 1px solid #ddd;
+
+}
+
+
+
+#login-detail .tab-content h3{
+
+	border-bottom: 1px solid #f39114;
+
+    display: inline-block;
+
+    padding-bottom: 5px;
+
+}
+
+
+
+
+
+
+
+.login-contains #My-Profile .personal-detail,
+
+.login-contains #My-Profile .career-objective,
+
+.login-contains #My-Profile .employment-detail,
+
+.login-contains #My-Profile .educational-detail,
+
+.login-contains #My-Profile .Trainings-Workshop{
+
+	border-bottom: 1px solid #ebebeb;
+
+	padding-bottom: 30px;
+
+	margin-bottom: 30px;
+
+}
+
+
+
+.login-contains #My-Profile .personal-detail li{
+
+	line-height: 40px;
+
+	font-weight: 700;
+
+	color: #898989;
+
+}
+
+
+
+
+
+.login-contains #My-Profile .personal-detail li>strong{
+
+	
+
+    font-size: 18px;
+
+    width: 25%;
+
+    display: inline-block;
+
+    color: #636363;
+
+}
+
+
+
+.login-contains #My-Profile table th, #Edit-profile table th {
+    padding: 10px;
+
+    border-bottom: none;
+
+}
+
+
+
+ table, thead, tbody, tr { width: 100%; }
+
+    table { table-layout: fixed }
+
+    table > thead > tr > th { width: auto; }
+
+
+
+
+
+    .login-contains #My-Profile table , #Edit-profile table{
+    font-weight: 600;
+
+    color: #7d7d7d;
+
+    line-height: 14px;
+
+    font-size: 12px;
+
+    border: 1px solid #ebebeb;
+
+    border-collapse: initial;
+
+    border-bottom: none;
+
+
+
+    }
+
+
+
+.login-contains #My-Profile table>thead , #Edit-profile table>thead{
+    background: #f39114;
+
+    color: #fff;
+
+    border: none;
+
+    box-shadow: none;
+
+    font-size: 13px;
+
+}
+
+.login-contains #My-Profile table th{
+
+    
+
+}
+
+
+
+.login-contains #My-Profile table tbody td , #Edit-profile table tbody td{
+    line-height: 24px;
+
+    vertical-align: middle;
+
+    border-right:1px solid #ebebeb;
+
+    border-top: none;
+
+    padding: 10px;
+
+    border-bottom: 1px solid #ebebeb;
+
+}
+
+
+
+.login-contains #My-Profile table tbody td:last-child{
+
+    border-right: none;
+
+}
+
+
+
+.login-contains #My-Profile table tbody td>ul li{
+
+    text-indent: -15px;
+
+    padding-left: 15px;
+
+}
+
+
+
+.login-contains #My-Profile table tbody td>ul li:before{
+
+    content: '\f0da';
+
+    font-family: 'FontAwesome';
+
+    padding-right: 6px
+
+}
+
+
+
+
+
+/*FORM*/
+
+.form-horizontal .form-group {
+
+    margin-bottom: 10px;
+    }
+
+.form-horizontal span{
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Raleway';
+}
+
+.form-horizontal label.radio-inline {
+    color: #f39114;
+    font-weight: 600;
+}
+
+.form-horizontal label.checkbox-inline {
+    color: #f39114;
+    font-weight: 600;
+}
+
+.form-horizontal select#year,
+.form-horizontal select#month,
+.form-horizontal select#salary{
+    width: auto;
+    float: left;
+}
+.form-horizontal select#year+label,
+.form-horizontal select#month+label,
+ .form-horizontal select#salary+label{
+    padding-left: 10px;
+}
+
+.form-horizontal .catogory{
+     border: 1px solid #f39114;
+    padding: 15px;
+    overflow-y: scroll;
+    max-height: 100px;
+}
+
+.form-control{
+    height: 37px;
+    /*padding: 0 0 0 15px !important;*/
+    padding: 7px !important;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.login-contains #My-Profile table th, #Edit-profile table th{
+    border-collapse: collapse;
+    border-top: none;
+    border-bottom: 1px solid #ebebeb;
+    border-right: 1px solid #ebebeb;
+    width: 20%;
+    background: #f39114;
+    color: #fff;
+    vertical-align: middle;
+    padding: 15px;
+    line-height: 20px
+}
+.login-contains #My-Profile table .vtop , #Edit-profile table .vtop{
+    vertical-align: top;
+}
+
+.login-contains #My-Profile table td, #Edit-profile table td{
+    padding-left: 30px;
+}
+.login-contains #My-Profile table td>ul li, #Edit-profile table td>ul li{
+    padding-bottom: 15px;
+}
+
+
+/*EDIT MY PROFILE*/
+
+.login-contains .editProfile span{
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #636363;
+    padding-bottom: 5px;
+    margin: 15px 0;
+    display: inline-block;
+    background: rgba(243,145,20, .2);
+    padding: 5px 20px;
+}
+
+.login-contains #Edit-profile div#exTab2 {
+    margin: 30px 0;
+    padding: 0;
+}
+
+.login-contains #Edit-profile ul.nav.nav-tabs{
+    border-bottom: 2px solid #81b524;
+    padding-bottom: 4px;
+}
+
+.login-contains #Edit-profile .nav-tabs>li {
+    float: left;
+    background: none;
+    margin-right: 2px;
+    }
+    .login-contains #Edit-profile .nav-tabs>li>a {
+        color: #fff;
+        background: #636363;
+        margin-right: 0;
+        padding: 15px;
+        border: none;
+      /*  -webkit-transition: background 500ms ease-out 1s;
+    -moz-transition: background 500ms ease-out 1s;
+    -o-transition: background 500ms ease-out 1s;
+    transition: background 500ms ease-out 1s;*/
+    }
+
+.login-contains #Edit-profile .nav-tabs>li.active{
+    background-color: #81b524;
+
+}
+.login-contains #Edit-profile .nav-tabs>li.active>a{
+    background-color: #81b524;
+    border: none;
+}
+
+.login-contains #Edit-profile .nav-tabs>li>a:hover{
+   background: #f39114;
+
+}
+
+.login-contains #Edit-profile .nav-tabs>li.active::before {
+    content: none;
+}
+
+.login-contains #Edit-profile .tabElement{
+   margin: 5px 0;
+    padding: 10px;
+    border: none;
+}
+
+.login-contains #Edit-profile .tabElement form{
+    margin-top: 30px;
+}
+
+
+
+.progress {
+height: 25px;
+margin-bottom: 20px;
+overflow: hidden;
+background-color: #f5f5f5;
+border-radius: 4px;
+-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+
+.login-sidebar a.logOut {
+
+    font-weight: 700;
+   display: inline-block;
+    color: #636363;
+    border: 1px solid #81b524;
+    background: none;
+    float: left;
+    margin: 0 5px 30px 0;
+
+    }
+
+
+.progressBar h4.incompleteInfo{
+    margin-bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
