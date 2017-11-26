@@ -23,9 +23,9 @@ date_default_timezone_set("Asia/Kathmandu");
 | a PHP script and you can easily do that on your own.
 |
 */
-if($_SERVER['HTTP_HOST']=="smpharma.dev" || $_SERVER['HTTP_HOST']=="127.0.0.1")
+if($_SERVER['HTTP_HOST']=="sm.pharma" || $_SERVER['HTTP_HOST']=="127.0.0.1")
 {
-	$config['base_url'] = 'http://smpharma.dev';
+	$config['base_url'] = 'sm.pharma';
 }
 else
 {	

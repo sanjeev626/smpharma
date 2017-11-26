@@ -64,8 +64,8 @@ if (!empty($stock_detail)) {
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-4 text-center">Medicine Name</label>
             <label class="col-sm-1 text-center">Quantity</label>
+            <label class="col-sm-4 text-center">Medicine Name</label>
             <label class="col-sm-2 text-center">Rate</label>
             <label class="col-sm-1 text-right">Sub Total</label>
             <label class="col-sm-1 text-center">Stock</label>
@@ -75,11 +75,11 @@ if (!empty($stock_detail)) {
         $j=$i+1;
         ?>
         <div class="form-group">
-          <div class="col-sm-4">
-              <input type="text" name="medicine_name[]" id='medicine_name_<?php echo $j;?>' class="form-control inputitem" value='' placeholder="Medicine Name"  num="<?php echo $j;?>" />
-          </div>
           <div class="col-sm-1">
               <input type="text" name="quantity[]" id='quantity_<?php echo $j;?>' class="form-control inputitem" value='' placeholder="Quantity" onkeyup="calculate(<?php echo $j;?>)" />                
+          </div>
+          <div class="col-sm-4">
+              <input type="text" name="medicine_name[]" id='medicine_name_<?php echo $j;?>' class="form-control inputitem" value='' placeholder="Medicine Name"  num="<?php echo $j;?>" />
           </div>
           <div class="col-sm-2">
               <input type="text" name="rate[]" id='rate_<?php echo $j;?>' class="form-control pack_list" value='' placeholder="Rate" onkeyup="calculate(<?php echo $j;?>)"/>
