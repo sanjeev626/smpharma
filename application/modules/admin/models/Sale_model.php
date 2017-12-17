@@ -8,7 +8,7 @@
  */
 class sale_model extends CI_Model {
 
-    private $table_sale = 'tbl_sale';
+    private $table_sale = 'tbl_sales';
 
     public function __construct() {
         parent::__construct();
@@ -250,6 +250,21 @@ class sale_model extends CI_Model {
         } else {
             return $query->result();
         }   
+    }
+
+    function get_all_sales($from_date='',$to_date='')
+    {
+        $this->db->select('*');
+        $this->db->where('date',date('Y-m-d'));
+        $this->db->order_by("id", "DESC");
+        $query = $this->db->get($this->table_sale);  
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        } 
+        
     }
 }
 

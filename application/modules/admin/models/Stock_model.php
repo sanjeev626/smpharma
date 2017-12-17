@@ -145,13 +145,16 @@ class stock_model extends CI_Model {
                     $this->db->insert('tbl_medicine',$data3);
                     $medicine_id = $this->db->insert_id();
                 }
+
+                $expiry_date = $_POST['exp_year'][$i].'-'.$_POST['exp_month'][$i].'-01';
+
                 $data2 = array(
                 'creditmemo_id' => $crmemo_id,
                 'batch_number' => $_POST['batch_number'][$i],
                 'medicine_id' => $medicine_id,
                 'item_description' => $_POST['medicine_name'][$i],
                 'pack' => $_POST['pack'][$i],
-                'expiry_date' => $_POST['expiry_date'][$i],
+                'expiry_date' => $expiry_date,
                 'quantity' => $_POST['quantity'][$i],
                 'deal' => $_POST['deal'][$i],
                 'rate' => $_POST['rate'][$i],
