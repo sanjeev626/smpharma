@@ -108,6 +108,12 @@ class Sale extends MY_Controller {
         $this->load->view('home', $data);
     }  
 
+    function addTempSale()
+    {
+        //print_r($_POST);
+        $this->Sale_model->insertTempSale();
+    }
+
     function get_medicines_stock(){
         if (isset($_GET['term'])){
           $q = strtolower($_GET['term']);
