@@ -30,6 +30,10 @@
   <link rel="stylesheet" href="<?php echo base_url();?>content_admin/plugins/daterangepicker/daterangepicker.css">
 
   <!--datetime picker -->
+  <script src="<?php echo base_url();?>content_admin/extra/nepali.datepicker.v2.2.min.js"></script>
+  <link rel="stylesheet" href="<?php echo base_url();?>content_admin/extra/nepali.datepicker.v2.2.min.css" />
+
+  <!--Nepali datetime picker -->
   <script src="<?php echo base_url();?>content_admin/extra/moment.min.js"></script>
   <link rel="stylesheet" href="<?php echo base_url();?>content_admin/extra/bootstrap-datetimepicker.min.css" />
 

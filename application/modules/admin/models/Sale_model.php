@@ -47,14 +47,6 @@ class sale_model extends CI_Model {
         }
     }
 
-    public function insert_dropdown(){
-        $data = array(
-            'fid' => $this->input->post('fid'),
-            'dropvalue' => $this->input->post('dropvalue')
-            );
-        $this->db->insert($this->table_sale,$data);
-    }
-
     public function delete_sale($id){
         $this->db->where('id',$id);
         $this->db->delete($this->table_sale);
@@ -62,35 +54,27 @@ class sale_model extends CI_Model {
 
     }
 
-    public function add_sale(){
-        //Step 1 : Insert in tbl_creditmemo
-        $invoice_eng_date = $this->input->post('invoice_eng_date');
-        $ied = explode('-',$invoice_eng_date);
-        //print_r($ied);
-        $distributorname = $this->input->post('supplierName');
-        $distributor_id = $this->general_model->getFieldValue('tbl_supplier', 'id', 'fullname', $distributorname);
-        $ind = $this->date_model->eng_to_nep($ied['0'],$ied['1'],$ied['2']);
-        $invoice_nepali_date = $ind['year'].'-'.$ind['month'].'-'.$ind['date'];
+    public function add_sales(){
+        //Step 1 : Insert in tbl_tempsales
         $data = array(
-            'distributor_id' => $distributor_id,
-            'invoice_no' => $this->input->post('invoice_no'),
-            'invoice_eng_date' => $this->input->post('invoice_eng_date'),
-            'invoice_nepali_date' => $invoice_nepali_date,
-            'total_amount' => $this->input->post('total_amount'),
+            'customer_name' => $this->input->post('customer_name'),
+            'contact_number' => $this->input->post('contact_number'),
+            'sale_date' => $this->input->post('sale_date'),
+            'sale_date_nepali' => $this->input->post('sale_date_nepali'),
+            'sub_total' => $this->input->post('total_amount'),
+            'discount_percentage' => $this->input->post('discount_percentage'),
             'discount_amount' => $this->input->post('discount_amount'),
-            'vat_amount' => $this->input->post('vat_amount'),
-            'grand_amount' => $this->input->post('grand_amount')
+            'grand_total' => $this->input->post('grand_total')
         );        
-        $this->db->insert('tbl_creditmemo',$data);
-        $crmemo_id = $this->db->insert_id();
-        if($crmemo_id>0)
+        $this->db->insert('tbl_tempsales',$data);
+        $tsales_id = $this->db->insert_id();
+        if($tsales_id>0)
         {
-            $this->add_sale_contents($crmemo_id);
+            $this->add_sale_contents($tsales_id);
         }     
     }
 
-    function add_sale_contents($crmemo_id){
-        print_r($_POST);
+    function add_sale_contents($tsales_id){
         for($i=0;$i<count($_POST['medicine_name']);$i++)
         {
             if(!empty($_POST['medicine_name'][$i]))
@@ -98,21 +82,13 @@ class sale_model extends CI_Model {
                 $medicine_name = $_POST['medicine_name'][$i];
                 $medicine_id = $this->general_model->getFieldValue('tbl_medicine', 'id', 'medicine_name', $medicine_name);
                 $data2 = array(
-                'creditmemo_id' => $crmemo_id,
-                'batch_number' => $_POST['batch_number'][$i],
+                'tsales_id' => $tsales_id,
+                'stock_id' => $stock_id,
                 'medicine_id' => $medicine_id,
-                'item_description' => $_POST['medicine_name'][$i],
-                'pack' => $_POST['pack'][$i],
-                'expiry_date' => $_POST['expiry_date'][$i],
+                'medicine_name' => $medicine_name,
                 'quantity' => $_POST['quantity'][$i],
-                'deal' => $_POST['deal'][$i],
                 'rate' => $_POST['rate'][$i],
-                'deal_percentage' => $_POST['deal_percentage'][$i],
-                'sale' => $_POST['sale'][$i],
-                'sales' => '0',
-                'total_price' => $_POST['total_price'][$i],
-                'cp_per_unit' => $_POST['cp_per_unit'][$i],
-                'sp_per_unit' => $_POST['sale_price'][$i]
+                'sub_total' => $_POST['quantity'][$i]*$_POST['rate'][$i]
                 );
                 $this->db->insert('tbl_sale',$data2);
             }
@@ -147,8 +123,8 @@ class sale_model extends CI_Model {
         if($query->num_rows() > 0){
           foreach ($query->result_array() as $row){
             $stock = $row['stock']-$row['sales'];
-            $new_row['label']=htmlentities(stripslashes($row['item_description']));
-            $new_row['value']=htmlentities(stripslashes($row['item_description']));
+            $new_row['label']=htmlentities(stripslashes($row['item_description']." - ".$row['expiry_date']." - ".$stock));
+            $new_row['value']=htmlentities(stripslashes($row['item_description']." - ".$row['expiry_date']." - ".$stock));
             $new_row['sp_per_unit']=htmlentities(stripslashes($row['sp_per_unit']));
             $new_row['stock']=htmlentities(stripslashes($stock));
             $row_set[] = $new_row; //build an array
