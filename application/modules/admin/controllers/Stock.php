@@ -62,6 +62,102 @@ class Stock extends MY_Controller {
         $this->load->view('home', $data);
     }
 
+    public function near_expiry($from_date='',$to_date=''){
+        if(empty($from_date))
+            $from_date = date('Y-m-d');
+        if(empty($to_date))
+            $to_date = date('Y-m-d', strtotime($from_date. ' + 180 days'));
+
+
+        $config['base_url'] = base_url() . 'admin/stock/near_expiry';
+        //$config['uri_segment'] = 3;
+        $config['per_page'] = 50;
+
+        /* Bootstrap Pagination  */
+
+        $config['full_tag_open'] = "<ul class='pagination'>";
+        $config['full_tag_close'] ="</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+
+        /* End of Bootstrap Pagination */
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+        
+        $config['total_rows'] = $this->Stock_model->get_all_near_expiry($config['per_page'], $page,$from_date,$to_date,'1');
+        $data['stock_info'] = $this->Stock_model->get_all_near_expiry($config['per_page'], $page,$from_date,$to_date);
+        
+
+        $this->pagination->initialize($config);
+
+        $data['title'] = '.:: Near Expiry Medicines ::.';
+        $data['page_header'] = 'Near Expiry Medicines ';
+        $data['page_header_icone'] = 'fa-product-hunt';
+        $data['nav'] = 'Near Expiry Medicines';
+        $data['panel_title'] = 'View Near Expiry Medicines ';
+        $data['page'] = $page;
+        $data['main'] = 'near_expiry';
+        //$data['stock_info'] = $this->Stock_model->get_all_near_expiry($from_date,$to_date);
+
+        $this->load->view('home', $data);
+    }
+
+    public function expired(){
+        $config['base_url'] = base_url() . 'admin/stock/expired';
+        //$config['uri_segment'] = 3;
+        $config['per_page'] = 50;
+
+        /* Bootstrap Pagination  */
+
+        $config['full_tag_open'] = "<ul class='pagination'>";
+        $config['full_tag_close'] ="</ul>";
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
+        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
+        $config['next_tag_open'] = "<li>";
+        $config['next_tagl_close'] = "</li>";
+        $config['prev_tag_open'] = "<li>";
+        $config['prev_tagl_close'] = "</li>";
+        $config['first_tag_open'] = "<li>";
+        $config['first_tagl_close'] = "</li>";
+        $config['last_tag_open'] = "<li>";
+        $config['last_tagl_close'] = "</li>";
+
+        /* End of Bootstrap Pagination */
+
+        $page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+        
+        $config['total_rows'] = $this->Stock_model->get_all_expired($config['per_page'], $page,'1');
+        $data['stock_info'] = $this->Stock_model->get_all_expired($config['per_page'], $page);
+        
+
+        $this->pagination->initialize($config);
+
+        $data['title'] = '.:: Expired Medicines ::.';
+        $data['page_header'] = 'Expired Medicines ';
+        $data['page_header_icone'] = 'fa-product-hunt';
+        $data['nav'] = 'Expired Medicines';
+        $data['panel_title'] = 'View Expired Medicines ';
+        $data['page'] = $page;
+        $data['main'] = 'expired';
+        //$data['stock_info'] = $this->Stock_model->get_all_near_expiry($from_date,$to_date);
+
+        $this->load->view('home', $data);
+    }
+
     public function deleteStock($sid){
 
         if (!isset($pid))
@@ -126,7 +222,7 @@ class Stock extends MY_Controller {
 
             $pid = $this->Stock_model->add_stock();
             $this->session->set_flashdata('success', 'Stock added Successfully...');
-            redirect(base_url() . 'admin/Stock', 'refresh');
+            redirect(base_url() . 'admin/Stock/add', 'refresh');
         }
     }  
 

@@ -123,8 +123,8 @@ class sale_model extends CI_Model {
         if($query->num_rows() > 0){
           foreach ($query->result_array() as $row){
             $stock = $row['stock']-$row['sales'];
-            $new_row['label']=htmlentities(stripslashes($row['item_description']." - ".$row['expiry_date']." - ".$stock));
-            $new_row['value']=htmlentities(stripslashes($row['item_description']." - ".$row['expiry_date']." - ".$stock));
+            $new_row['label']=htmlentities(stripslashes($row['item_description']));
+            $new_row['value']=htmlentities(stripslashes($row['item_description']." - ".." - ".$stock));
             $new_row['sp_per_unit']=htmlentities(stripslashes($row['sp_per_unit']));
             $new_row['stock']=htmlentities(stripslashes($stock));
             $row_set[] = $new_row; //build an array
@@ -229,5 +229,5 @@ class sale_model extends CI_Model {
     }
 }
 
-/* End of file Dropdown_model.php
- * Location: ./application/modules/admin/models/Dropdown_model.php */
+/* End of file Sale_model.php
+ * Location: ./application/modules/admin/models/Sale_model.php */

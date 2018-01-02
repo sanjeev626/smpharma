@@ -28,6 +28,44 @@ class stock_model extends CI_Model {
         }
     }
 
+    public function get_all_near_expiry($limit,$offset,$from_date,$to_date,$return_count='')
+    {
+        $this->db->select('*');
+        $this->db->order_by("expiry_date","ASC");      
+        $this->db->where('expiry_date >',$from_date);  
+        $this->db->where('expiry_date <',$to_date);
+        $query =  $this->db->get($this->table_stock,$limit,$offset);
+        //echo "SELECT * FROM ".$this->table_stock." LIMIT ".$limit.", ".$offset;
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            if($return_count==1)
+                return $query->num_rows();
+            else
+                return $query->result();
+        }   
+    }
+
+    public function get_all_expired($limit,$offset,$return_count='')
+    {
+        $today = date('Y-m-d');
+        $this->db->select('*');
+        $this->db->order_by("expiry_date","ASC");      
+        $this->db->where('expiry_date <',$today);
+        $query =  $this->db->get($this->table_stock,$limit,$offset);
+        //echo "SELECT * FROM ".$this->table_stock." LIMIT ".$limit.", ".$offset;
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            if($return_count==1)
+                return $query->num_rows();
+            else
+                return $query->result();
+        }   
+    }
+
     public function get_field_by_id($field,$cid){
         $this->db->select($field);
         $this->db->where('id',$cid);
@@ -107,13 +145,16 @@ class stock_model extends CI_Model {
                     $this->db->insert('tbl_medicine',$data3);
                     $medicine_id = $this->db->insert_id();
                 }
+
+                $expiry_date = $_POST['exp_year'][$i].'-'.$_POST['exp_month'][$i].'-01';
+
                 $data2 = array(
                 'creditmemo_id' => $crmemo_id,
                 'batch_number' => $_POST['batch_number'][$i],
                 'medicine_id' => $medicine_id,
                 'item_description' => $_POST['medicine_name'][$i],
                 'pack' => $_POST['pack'][$i],
-                'expiry_date' => $_POST['expiry_date'][$i],
+                'expiry_date' => $expiry_date,
                 'quantity' => $_POST['quantity'][$i],
                 'deal' => $_POST['deal'][$i],
                 'rate' => $_POST['rate'][$i],
@@ -194,6 +235,18 @@ class stock_model extends CI_Model {
           }
           echo json_encode($row_set); //format the array into json data
         }        
+    }
+
+    public function get_suppliername_by_stock_id($stock_id){
+        $this->db->select('sup.fullname');
+        $this->db->join('tbl_creditmemo tc','tc.id = tbl_stock.creditmemo_id');
+        $this->db->join('tbl_supplier sup','sup.id = tc.distributor_id');
+        $this->db->where('tbl_stock.id',$stock_id);
+        $q = $this->db->get($this->table_stock);
+        //echo $this->db->last_query();
+        $data1 = $q->result_array();
+        $data = array_shift($data1);
+        return $data['fullname'];
     }
 
     function getStockMedicine($medicine_id)

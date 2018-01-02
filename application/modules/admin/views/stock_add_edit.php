@@ -176,7 +176,7 @@ if (!empty($stock_detail)) {
         echo form_open($action, $attributes);
         ?>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Supplier / Distributor :<span class="asterisk">*</span></label>
+            <label class="col-sm-2 control-label">Supplier / Distributor:<span class="asterisk">*</span></label>
             <div class="col-sm-8">
                 <input type="text" required name="supplierName" id='supplierName' class="form-control supplier" value='<?php if (!empty($creditmemo)) echo $distributorname; ?>' placeholder="Supplier Name" />
             </div>
@@ -227,7 +227,60 @@ if (!empty($stock_detail)) {
             </label>
         </div>
 
+        
+        <?php
+        //print_r($stockInfo); 
+        if(empty($stockInfo))
+        {
+          for($i=0;$i<10;$i++){
+          $j=$i+1;
+        ?>
+        <div class="form-group">
+            <div class="col-sm-2">
+                <input type="text" <?php if($i==0) echo 'required';?> name="medicine_name[]" id='medicine_name_<?php echo $j;?>' class="form-control inputitem" value='' placeholder="Medicine Name" />
+                <input type="text" name="company_name[]" id='company_name_<?php echo $j;?>' class="form-control company" value='' placeholder="Company Name" />
+            </div>
+            <div class="col-sm-2">
+                <input type="text" <?php if($i==0) echo 'required';?> name="pack[]" id='pack_<?php echo $j;?>' class="form-control pack_list" value='' placeholder="Pack (10)" onkeyup="calculate(<?php echo $j;?>);" />
+                <input type="text" <?php if($i==0) echo 'required';?> name="batch_number[]" id='batch_number_<?php echo $j;?>' class="form-control" value='' placeholder="Batch Number" />
+            </div>
+            <div class="col-sm-2">
+              <!-- <input type="text" name="expiry_date[]" id='expiry_date<?php echo $i+1;?>' class="form-control expiry_date" value='' placeholder="Expiry Date (dd-mm-yyyy)" /> -->
+                <?php
+                $month = array('01'=>'Jan','02'=>'Feb','03'=>'Mar','04'=>'Apr','05'=>'May','06'=>'Jun','07'=>'Jul','08'=>'Aug','09'=>'Sep','10'=>'Oct','11'=>'Nov','12'=>'Dec',);
+                ?>
+                <select name="exp_month[]" style="box-shadow: none; border-color: #d2d6de; height:34px; color:#555; width:75px;">
+                  <?php foreach($month as $key=>$value){?>
+                  <option value="<?php echo $key;?>"><?php echo $key.' - '.$value;?></option>
+                  <?php } ?>
+                </select>
+                <select name="exp_year[]" style="box-shadow: none; border-color: #d2d6de; height:34px; color:#555;">
+                  <?php for($y=date('Y');$y<(date('Y')+6);$y++){?>
+                  <option value="<?php echo $y;?>"><?php echo $y;?></option>
+                  <?php } ?>
+                </select>
+                <input type="text" <?php if($i==0) echo 'required';?> name="quantity[]" id='quantity_<?php echo $j;?>' class="form-control" value='' placeholder="Quantity" onkeyup="calculate(<?php echo $j;?>);" />
+            </div>
+            <div class="col-sm-2">
+                <input type="text" <?php if($i==0) echo 'required';?> name="rate[]" id='rate_<?php echo $j;?>' class="form-control cc_rate" value='' placeholder="Cost Price" onkeyup="calculate(<?php echo $j;?>);" />
+                <input type="text" <?php if($i==0) echo 'required';?> name="sale_price[]" id='sale_price_<?php echo $j;?>' class="form-control" value='' placeholder="Sale Price" />
+            </div>
+            <div class="col-sm-2">
+                <input type="text" <?php if($i==0) echo 'required';?> name="deal[]" id='deal_<?php echo $j;?>' class="form-control" value='0' placeholder="Deal" />
+                <input type="text" <?php if($i==0) echo 'required';?> name="deal_percentage[]" id='deal_per_<?php echo $j;?>' class="form-control" value='0' placeholder="Deal Percentage - 7.5" onkeyup="calculate(<?php echo $j;?>);" />
+            </div>
+            <div class="col-sm-2">
+                <input type="text" <?php if($i==0) echo 'required';?> name="stock[]" id='stock_<?php echo $j;?>' class="form-control" value='' placeholder="Stock" />
+                <input type="text" <?php if($i==0) echo 'required';?> name="total_price[]" id='total_price_<?php echo $j;?>' class="form-control price_total" value='' placeholder="Total" />
+                <input type="hidden" name="cp_per_unit[]" id='cp_per_unit_<?php echo $j;?>' value='' />
+            </div>
+        </div>
         <?php 
+        } 
+        }
+        else
+        {
+          
             //for($i=0;$i<10;$i++){
             //$j=$i+1;
         $j=1;
@@ -264,43 +317,6 @@ if (!empty($stock_detail)) {
         </div>
         <?php //} 
         }
-        ?>
-        <?php
-        //print_r($stockInfo); 
-        if(empty($stockInfo))
-        {
-          for($i=0;$i<10;$i++){
-          $j=$i+1;
-        ?>
-        <div class="form-group">
-            <div class="col-sm-2">
-                <input type="text" <?php if($i==0) echo 'required';?> name="medicine_name[]" id='medicine_name_<?php echo $j;?>' class="form-control inputitem" value='' placeholder="Medicine Name" />
-                <input type="text" name="company_name[]" id='company_name_<?php echo $j;?>' class="form-control company" value='' placeholder="Company Name" />
-            </div>
-            <div class="col-sm-2">
-                <input type="text" <?php if($i==0) echo 'required';?> name="pack[]" id='pack_<?php echo $j;?>' class="form-control pack_list" value='' placeholder="Pack (10)" onkeyup="calculate(<?php echo $j;?>);" />
-                <input type="text" <?php if($i==0) echo 'required';?> name="batch_number[]" id='batch_number_<?php echo $j;?>' class="form-control" value='' placeholder="Batch Number" />
-            </div>
-            <div class="col-sm-2">
-                <input type="text" name="expiry_date[]" id='expiry_date<?php echo $i+1;?>' class="form-control expiry_date" value='' placeholder="Expiry Date (dd-mm-yyyy)" />
-                <input type="text" <?php if($i==0) echo 'required';?> name="quantity[]" id='quantity_<?php echo $j;?>' class="form-control" value='' placeholder="Quantity" onkeyup="calculate(<?php echo $j;?>);" />
-            </div>
-            <div class="col-sm-2">
-                <input type="text" <?php if($i==0) echo 'required';?> name="rate[]" id='rate_<?php echo $j;?>' class="form-control cc_rate" value='' placeholder="Cost Price" onkeyup="calculate(<?php echo $j;?>);" />
-                <input type="text" <?php if($i==0) echo 'required';?> name="sale_price[]" id='sale_price_<?php echo $j;?>' class="form-control" value='' placeholder="Sale Price" />
-            </div>
-            <div class="col-sm-2">
-                <input type="text" <?php if($i==0) echo 'required';?> name="deal[]" id='deal_<?php echo $j;?>' class="form-control" value='0' placeholder="Deal" />
-                <input type="text" <?php if($i==0) echo 'required';?> name="deal_percentage[]" id='deal_per_<?php echo $j;?>' class="form-control" value='0' placeholder="Deal Percentage - 7.5" onkeyup="calculate(<?php echo $j;?>);" />
-            </div>
-            <div class="col-sm-2">
-                <input type="text" <?php if($i==0) echo 'required';?> name="stock[]" id='stock_<?php echo $j;?>' class="form-control" value='' placeholder="Stock" />
-                <input type="text" <?php if($i==0) echo 'required';?> name="total_price[]" id='total_price_<?php echo $j;?>' class="form-control price_total" value='' placeholder="Total" />
-                <input type="hidden" name="cp_per_unit[]" id='cp_per_unit_<?php echo $j;?>' value='' />
-            </div>
-        </div>
-        <?php 
-        } 
         }
         ?>        
         <div class="form-group">
