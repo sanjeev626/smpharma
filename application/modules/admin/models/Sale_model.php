@@ -8,7 +8,7 @@
  */
 class sale_model extends CI_Model {
 
-    private $table_sale = 'tbl_sale';
+    private $table_sale = 'tbl_sales';
 
     public function __construct() {
         parent::__construct();
@@ -50,8 +50,6 @@ class sale_model extends CI_Model {
     public function delete_sale($id){
         $this->db->where('id',$id);
         $this->db->delete($this->table_sale);
-
-
     }
 
     public function add_sales(){
@@ -74,25 +72,105 @@ class sale_model extends CI_Model {
         }     
     }
 
-    function add_sale_contents($tsales_id){
-        for($i=0;$i<count($_POST['medicine_name']);$i++)
+    public function insertTempSale(){
+        //Step 1 : Insert in tbl_tempsales
+        $data = array(
+            'sale_date_nepali' => $this->input->post('sale_date_nepali'),
+            'sale_date' => $this->input->post('sale_date'),
+            'customer_name' => $this->input->post('customer_name'),
+            'contact_number' => $this->input->post('contact_number'),            
+            'sub_total' => $this->input->post('total_amount'),
+            'discount_percentage' => $this->input->post('discount_percentage'),            
+            'discount_amount' => $this->input->post('discount_amount'),
+            'grand_total' => $this->input->post('grand_total')
+        );   
+        /*print_r($data);*/
+        $this->db->insert('tbl_tempsales',$data);
+        $tsales_id = $this->db->insert_id();
+        if($tsales_id>0)
+        {
+            $this->insertTempOrder($tsales_id);
+            return $tsales_id;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    function insertTempOrder($tsales_id){
+        //print_r($_POST);
+        for($i=0;$i<count($_POST['medicine_id']);$i++)
         {
             if(!empty($_POST['medicine_name'][$i]))
             {                
-                $medicine_name = $_POST['medicine_name'][$i];
-                $medicine_id = $this->general_model->getFieldValue('tbl_medicine', 'id', 'medicine_name', $medicine_name);
                 $data2 = array(
                 'tsales_id' => $tsales_id,
-                'stock_id' => $stock_id,
-                'medicine_id' => $medicine_id,
-                'medicine_name' => $medicine_name,
+                'stock_id' => $_POST['stock_id'][$i],
+                'medicine_id' => $_POST['medicine_id'][$i],
+                'medicine_name' => $_POST['medicine_name'][$i],
                 'quantity' => $_POST['quantity'][$i],
                 'rate' => $_POST['rate'][$i],
                 'sub_total' => $_POST['quantity'][$i]*$_POST['rate'][$i]
                 );
-                $this->db->insert('tbl_sale',$data2);
+                //print_r($data2);
+                $this->db->insert('tbl_temporder',$data2);
             }
         }
+    }
+
+    function getTempSale($tempsales_id){
+        $this->db->select('*');
+        $this->db->where('id',$tempsales_id); 
+        $query = $this->db->get('tbl_tempsales');
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
+    function getTempOrder($tempsales_id){
+        $this->db->select('*');
+        $this->db->where('tsales_id',$tempsales_id);
+        $query =  $this->db->get('tbl_temporder');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        } 
+        
+    }
+
+    function getStock($medicine_id,$quantity)
+    {
+        $this->db->select('id,item_description, (stock-sales) as balance_quantity');
+        $this->db->where('(stock-sales)>',$quantity);
+        $this->db->where('medicine_id',$medicine_id);
+        $this->db->order_by("expiry_date","ASC");
+        $query =  $this->db->get('tbl_stock');
+        if ($query->num_rows() == 0) {
+            $this->gettotalavailableStock($medicine_id);
+            return FALSE;
+        } else {
+            $result = $query->result();
+            $ret = array('stock_id'=> array ( "0" => $result['0']->id),'quantity'=> array ( "0" => $quantity));
+            return $ret;
+        }    
+        //echo $this->db->last_query();   
+    }
+
+    function gettotalavailableStock($medicine_id)
+    {
+        $this->db->select_sum('stock');
+        $this->db->where('stock >',sales);
+        $this->db->where('medicine_id',$medicine_id);
+        $query =  $this->db->get('tbl_stock');
+        $result = $query->result();
+        echo $this->db->last_query();  
+        $total_stock = $result['0']->stock;
+        return $total_stock; 
     }
 
     public function update_sale($cid){
@@ -117,15 +195,17 @@ class sale_model extends CI_Model {
 
     function get_medicine_stock($q)
     {        
-        $this->db->select('*');
+        $this->db->select('id,medicine_id,item_description,expiry_date,stock,sales,sp_per_unit');
         $this->db->like('item_description', $q,'after');
         $query = $this->db->get('tbl_stock');
         if($query->num_rows() > 0){
           foreach ($query->result_array() as $row){
             $stock = $row['stock']-$row['sales'];
-            $new_row['label']=htmlentities(stripslashes($row['item_description']));
-            $new_row['value']=htmlentities(stripslashes($row['item_description']." - ".." - ".$stock));
+            $new_row['label']=htmlentities(stripslashes($row['item_description']." ( ".$row['expiry_date']." = ".$stock." ) "));
+            $new_row['value']=htmlentities(stripslashes($row['item_description']));
             $new_row['sp_per_unit']=htmlentities(stripslashes($row['sp_per_unit']));
+            $new_row['stock_id']=htmlentities(stripslashes($row['id']));
+            $new_row['medicine_id']=htmlentities(stripslashes($row['medicine_id']));
             $new_row['stock']=htmlentities(stripslashes($stock));
             $row_set[] = $new_row; //build an array
           }
@@ -226,6 +306,21 @@ class sale_model extends CI_Model {
         } else {
             return $query->result();
         }   
+    }
+
+    function get_all_sales($from_date='',$to_date='')
+    {
+        $this->db->select('*');
+        $this->db->where('date',date('Y-m-d'));
+        $this->db->order_by("id", "DESC");
+        $query = $this->db->get($this->table_sale);  
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        } 
+        
     }
 }
 

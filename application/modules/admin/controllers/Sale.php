@@ -30,9 +30,48 @@ class Sale extends MY_Controller {
 
     public function addSale()
     {
-        $this->Sale_model->add_sales();
+        $this->Sale_model->insertTempSale();
         $this->session->set_flashdata('success', 'New Sale added Successfully...');
-        redirect(base_url() . 'admin/sale', 'refresh');
+        //redirect(base_url() . 'admin/sale', 'refresh');
+    }
+
+    public function editTempSale()
+    {
+        $data['title'] = '.:: Edit Sale ::.';
+        $data['page_header'] = 'Edit  Sale';
+        $data['page_header_icone'] = 'fa-product-hunt';
+        $data['nav'] = 'Edit Sale';
+        $data['panel_title'] = 'Edit Sale';
+        $tempsales_id = $this->uri->segment(4);
+        $data['tempsales_id'] = $tempsales_id;
+        $data['tempsales'] = $this->Sale_model->getTempSale($tempsales_id);
+        $data['temporders'] = $this->Sale_model->getTempOrder($tempsales_id);
+        $data['main'] = 'tempsale_edit';
+        $this->load->view('home', $data);
+    }
+
+    function addTempSale()
+    {
+        //print_r($_POST);
+        $tempsale_id = $this->Sale_model->insertTempSale();
+        $this->session->set_flashdata('success', 'New Sale added Successfully...');
+        redirect(base_url() . 'admin/sale/showTempSale/'.$tempsale_id, 'refresh');
+    }
+
+    function showTempSale()
+    {
+        $data['title'] = '.:: Sales Details ::.';
+        $data['page_header'] = 'Sales Details';
+        $data['page_header_icone'] = 'fa-product-hunt';
+        $data['nav'] = 'Sale';
+        $data['panel_title'] = 'Sales - Details';
+        $tempsales_id = $this->uri->segment(4);
+        $data['tempsales_id'] = $tempsales_id;
+        $data['tempsales'] = $this->Sale_model->getTempSale($tempsales_id);
+        $data['temporders'] = $this->Sale_model->getTempOrder($tempsales_id);
+        $data['main'] = 'tempsale_show';
+
+        $this->load->view('home', $data);        
     }
 
     public function listSale(){
@@ -80,7 +119,7 @@ class Sale extends MY_Controller {
         //$data['organisation_type'] =$this->general_model->getAll('dropdown','fid = 6','','id,dropvalue');
 
         $this->load->view('home', $data);
-    }  
+    } 
 
     function get_medicines_stock(){
         if (isset($_GET['term'])){
