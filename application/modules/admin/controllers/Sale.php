@@ -28,13 +28,6 @@ class Sale extends MY_Controller {
         $this->load->view('home', $data);
     }
 
-    public function addSale()
-    {
-        $this->Sale_model->insertTempSale();
-        $this->session->set_flashdata('success', 'New Sale added Successfully...');
-        //redirect(base_url() . 'admin/sale', 'refresh');
-    }
-
     public function editTempSale()
     {
         $data['title'] = '.:: Edit Sale ::.';
@@ -114,6 +107,22 @@ class Sale extends MY_Controller {
 
         $this->load->view('home', $data);
     } 
+
+    function showSales()
+    {
+        $data['title'] = '.:: Sales Details ::.';
+        $data['page_header'] = 'Sales Details';
+        $data['page_header_icone'] = 'fa-product-hunt';
+        $data['nav'] = 'Sale';
+        $data['panel_title'] = 'Sales - Details';
+        $sales_id = $this->uri->segment(4);
+        $data['sales_id'] = $sales_id;
+        $data['sales'] = $this->Sale_model->getSale($sales_id);
+        $data['orders'] = $this->Sale_model->getOrder($sales_id);
+        $data['main'] = 'sales_single';
+
+        $this->load->view('home', $data);             
+    }
 
     function get_medicines_stock(){
         if (isset($_GET['term'])){

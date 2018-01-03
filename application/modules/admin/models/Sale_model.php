@@ -183,15 +183,39 @@ class sale_model extends CI_Model {
                 $dataOrder['stock_id'] = $rasOrder->stock_id;
                 $dataOrder['medicine_id'] = $rasOrder->medicine_id;
                 $dataOrder['medicine_name'] = $rasOrder->medicine_name;
+                $dataOrder['quantity'] = $rasOrder->quantity;
                 $dataOrder['rate'] = $rasOrder->rate;
                 $dataOrder['sub_total'] = $rasOrder->sub_total;
-                $this->db->insert('tbl_sales',$dataSales);
+                $this->db->insert('tbl_order',$dataSales);
             }
         }
 
           $this->db->delete('tbl_tempsales', array('id' => $tempsales_id));
           $this->db->delete('tbl_temporder', array('tsales_id' => $tempsales_id));
         } 
+    }
+
+    function getSale($sales_id){
+        $this->db->select('*');
+        $this->db->where('id',$sales_id); 
+        $query = $this->db->get('tbl_sales');
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
+    function getOrder($sales_id){
+        $this->db->select('*');
+        $this->db->where('sales_id',$sales_id);
+        $query =  $this->db->get('tbl_order');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }        
     }
 
     function getStock($medicine_id,$quantity)
@@ -362,15 +386,24 @@ class sale_model extends CI_Model {
     function get_all_sales($from_date='',$to_date='', $keywords='')
     {
         $this->db->select('*');
-        if(!empty($from_date) && $to_date=='')
-            $this->db->where('sale_date_nepali',$from_date);
-        elseif(!empty($from_date) && !empty($to_date))
+
+        if(!empty($keywords))
         {
-            $this->db->where('sale_date_nepali >=', $from_date);
-            $this->db->where('sale_date_nepali <=', $to_date);
+            $this->db->like('customer_name', $keywords);
+            $this->db->or_like('contact_number', $keywords);
         }
         else
-            $this->db->where('sale_date',date('Y-m-d'));            
+        {            
+            if(!empty($from_date) && $to_date=='')
+                $this->db->where('sale_date_nepali',$from_date);
+            elseif(!empty($from_date) && !empty($to_date))
+            {
+                $this->db->where('sale_date_nepali >=', $from_date);
+                $this->db->where('sale_date_nepali <=', $to_date);
+            }
+            else
+                $this->db->where('sale_date',date('Y-m-d'));
+        }
 
         $this->db->order_by("id", "DESC");
         $query = $this->db->get($this->table_sale);  

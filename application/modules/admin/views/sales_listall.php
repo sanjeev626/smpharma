@@ -62,7 +62,7 @@
                     <td><?php echo $row->discount_amount; ?></td>   
                     <td class="text-right">Nrs. <?php echo $row->grand_total; $total_sales = $total_sales+$row->grand_total; ?></td>                  
                     <td class="table-action text-center">
-                      <a class="btn btn-success btn-sm" href="javascript:void(0);"><i class="fa fa-edit tooltips" data-original-title="View Details"></i> View Details</a>
+                      <a class="btn btn-success btn-sm" href="<?php echo base_url();?>admin/sale/showSales/<?php echo $row->id;?>"><i class="fa fa-edit tooltips" data-original-title="View Details"></i> View Details</a>
                     </td>
                   </tr>
                   <?php
