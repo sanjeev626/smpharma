@@ -6,7 +6,7 @@
     </div>
     <div class="panel-body panel-body-nopadding">
         <?php
-        $action = base_url() . 'admin/Sale/completeSales';
+        $action = base_url() . 'admin/sale/completeSales/'.$tempsales_id;
         $attributes = array('class' => 'form-horizontal form-bordered', 'id' => 'form1', 'enctype' => 'multipart/form-data');
         echo form_open($action, $attributes);
         ?>
@@ -57,33 +57,33 @@
         <?php } ?> 
         <hr/>       
         <div class="form-group">
-          <label class="col-sm-2 control-label">Total Amount :</label>
-          <div class="col-sm-8">
+          <label class="col-sm-8 control-label">Total Amount :</label>
+          <div class="col-sm-2 text-right">
             Nrs. <?php echo $tempsales['0']->sub_total;?>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">% Discount :</label>
-          <div class="col-sm-8">
+          <label class="col-sm-8 control-label">% Discount :</label>
+          <div class="col-sm-2 text-right">
             <?php echo $tempsales['0']->discount_percentage;?>%
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Discount :</label>
-          <div class="col-sm-8">
+          <label class="col-sm-8 control-label">Discount :</label>
+          <div class="col-sm-2 text-right">
             Nrs. <?php echo $tempsales['0']->discount_amount;?>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-sm-2 control-label">Grand Total :</label>
-          <div class="col-sm-8">
+          <label class="col-sm-8 control-label">Grand Total :</label>
+          <div class="col-sm-2 text-right">
             Nrs. <?php echo $tempsales['0']->grand_total;?>
           </div>
         </div>
         <hr/>
         <div class="form-group">
-          <label class="col-sm-2 control-label">&nbsp;</label>
-          <div class="col-sm-8">
+          <label class="col-sm-8 control-label">&nbsp;</label>
+          <div class="col-sm-2 text-right">
             <a href="<?php echo base_url() . 'admin/sale/editTempSale/'.$tempsales_id;?>" class="btn btn-success btn-flat">Back</a>
             <button class="btn btn-success btn-flat" type="submit">Complete</button>
           </div>

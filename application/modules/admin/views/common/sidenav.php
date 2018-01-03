@@ -30,7 +30,7 @@
         <li class ="<?php if($this->uri->segment(2) == 'sale'){ echo 'active'; } ?>"><a href="javascript:void(0);"><i class="fa fa-edit"></i><span>SALE</span></a>          
           <ul class="treeview-menu">
             <li class="<?php if($this->uri->segment(3) == ''){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/sale"><i class="fa fa-circle-o"></i> Add Sales</a></li>
-            <li class="<?php if($this->uri->segment(3) == 'listSale'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/sale/listSale"><i class="fa fa-circle-o"></i> List Sales</a></li>
+            <li class="<?php if($this->uri->segment(3) == 'listSales'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/sale/listSales"><i class="fa fa-circle-o"></i> List Sales</a></li>
           </ul>
         </li>
         </ul>

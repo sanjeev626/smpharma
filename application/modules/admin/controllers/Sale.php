@@ -71,50 +71,44 @@ class Sale extends MY_Controller {
         $data['temporders'] = $this->Sale_model->getTempOrder($tempsales_id);
         $data['main'] = 'tempsale_show';
 
-        $this->load->view('home', $data);        
+        $this->load->view('home', $data);             
     }
 
-    public function listSale(){
+    function completeSales()
+    {
+        $tempsales_id = $this->uri->segment(4);
+        //echo $tempsales_id;
+        $data['tempsales_id'] = $tempsales_id;
+        $this->Sale_model->moveTempSale($tempsales_id);
+        //$data['main'] = 'tempsale_show';
 
-        $config['base_url'] = base_url() . 'admin/sale/listSale';
-        $config['uri_segment'] = 3;
-        $config['per_page'] = 50;
+        $this->session->set_flashdata('success', 'Sales completed Successfully...');
+        redirect(base_url() . 'admin/sale/listSales/', 'refresh');
 
-        /* Bootstrap Pagination  */
+    }
 
-        $config['full_tag_open'] = "<ul class='pagination'>";
-        $config['full_tag_close'] ="</ul>";
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = "<li class='disabled'><li class='active'><a href='#'>";
-        $config['cur_tag_close'] = "<span class='sr-only'></span></a></li>";
-        $config['next_tag_open'] = "<li>";
-        $config['next_tagl_close'] = "</li>";
-        $config['prev_tag_open'] = "<li>";
-        $config['prev_tagl_close'] = "</li>";
-        $config['first_tag_open'] = "<li>";
-        $config['first_tagl_close'] = "</li>";
-        $config['last_tag_open'] = "<li>";
-        $config['last_tagl_close'] = "</li>";
+    public function listSales(){
+        $from_date='';
+        $to_date='';
+        $keywords='';
+        if(isset($_POST['keywords']))
+            $keywords = $_POST['keywords'];
 
-        /* End of Bootstrap Pagination */
+        if(isset($_POST['sale_date']))
+            $from_date = $_POST['sale_date'];
 
-        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        if(isset($_POST['sale_date_to']))
+            $to_date = $_POST['sale_date_to'];
 
+        $data['sales_info'] = $this->Sale_model->get_all_sales($from_date,$to_date,$keywords);
         
-        //$config['total_rows'] = $this->db->count_all('tbl_medicine');
-        $config['total_rows'] = 50;
-        $data['sales_info'] = $this->Sale_model->get_all_sales($config['per_page'], $page);
-        
-
-        $this->pagination->initialize($config);
-
         $data['title'] = '.:: List Sale ::.';
         $data['page_header'] = 'List Sale';
         $data['page_header_icone'] = 'fa-product-hunt';
         $data['nav'] = 'Medicine';
         $data['panel_title'] = 'Sale List';
-        $data['page'] = $page;
+        $data['sale_date'] = $from_date;
+        $data['sale_date_to'] = $to_date;
         $data['main'] = 'sales_listall';
         //$data['organisation_type'] =$this->general_model->getAll('dropdown','fid = 6','','id,dropvalue');
 

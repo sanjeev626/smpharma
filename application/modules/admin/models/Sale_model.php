@@ -143,6 +143,57 @@ class sale_model extends CI_Model {
         
     }
 
+    function moveTempSale($tempsales_id){
+        //move to tbl_sales
+        $this->db->select('*');
+        $this->db->where('id',$tempsales_id); 
+        $query = $this->db->get('tbl_tempsales');
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            $rasSales = $query->result();
+            $dataSales['current_datetime'] = $rasSales['0']->current_datetime;
+            $dataSales['sale_date'] = $rasSales['0']->sale_date;
+            $dataSales['sale_date_nepali'] = $rasSales['0']->sale_date_nepali;
+            $dataSales['customer_name'] = $rasSales['0']->customer_name;
+            $dataSales['contact_number'] = $rasSales['0']->contact_number;
+            $dataSales['sub_total'] = $rasSales['0']->sub_total;
+            $dataSales['discount_percentage'] = $rasSales['0']->discount_percentage;
+            $dataSales['discount_amount'] = $rasSales['0']->discount_amount;
+            $dataSales['grand_total'] = $rasSales['0']->grand_total;
+            //print_r($dataSales);            
+            $this->db->insert('tbl_sales',$dataSales);
+            $sales_id = $this->db->insert_id();
+        }
+        if($sales_id>0)
+        {
+        //move to tbl_order
+        $this->db->select('*');
+        $this->db->where('tsales_id',$tempsales_id);
+        $query =  $this->db->get('tbl_temporder');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            $rasOrders = $query->result();
+            foreach($rasOrders as $rasOrder)
+            {
+                $dataOrder='';
+                $dataOrder['sales_id'] = $sales_id;
+                $dataOrder['stock_id'] = $rasOrder->stock_id;
+                $dataOrder['medicine_id'] = $rasOrder->medicine_id;
+                $dataOrder['medicine_name'] = $rasOrder->medicine_name;
+                $dataOrder['rate'] = $rasOrder->rate;
+                $dataOrder['sub_total'] = $rasOrder->sub_total;
+                $this->db->insert('tbl_sales',$dataSales);
+            }
+        }
+
+          $this->db->delete('tbl_tempsales', array('id' => $tempsales_id));
+          $this->db->delete('tbl_temporder', array('tsales_id' => $tempsales_id));
+        } 
+    }
+
     function getStock($medicine_id,$quantity)
     {
         $this->db->select('id,item_description, (stock-sales) as balance_quantity');
@@ -168,7 +219,7 @@ class sale_model extends CI_Model {
         $this->db->where('medicine_id',$medicine_id);
         $query =  $this->db->get('tbl_stock');
         $result = $query->result();
-        echo $this->db->last_query();  
+        //echo $this->db->last_query();  
         $total_stock = $result['0']->stock;
         return $total_stock; 
     }
@@ -308,10 +359,19 @@ class sale_model extends CI_Model {
         }   
     }
 
-    function get_all_sales($from_date='',$to_date='')
+    function get_all_sales($from_date='',$to_date='', $keywords='')
     {
         $this->db->select('*');
-        $this->db->where('date',date('Y-m-d'));
+        if(!empty($from_date) && $to_date=='')
+            $this->db->where('sale_date_nepali',$from_date);
+        elseif(!empty($from_date) && !empty($to_date))
+        {
+            $this->db->where('sale_date_nepali >=', $from_date);
+            $this->db->where('sale_date_nepali <=', $to_date);
+        }
+        else
+            $this->db->where('sale_date',date('Y-m-d'));            
+
         $this->db->order_by("id", "DESC");
         $query = $this->db->get($this->table_sale);  
         //echo $this->db->last_query();
