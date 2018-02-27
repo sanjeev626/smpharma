@@ -176,36 +176,35 @@ if (!empty($stock_detail)) {
         echo form_open($action, $attributes);
         ?>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Supplier / Distributor:<span class="asterisk">*</span></label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 control-label">Supplier / Distributor:<span class="asterisk">*</span></label>
+            <div class="col-sm-7">
                 <input type="text" required name="supplierName" id='supplierName' class="form-control supplier" value='<?php if (!empty($creditmemo)) echo $distributorname; ?>' placeholder="Supplier Name" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Invoice Number :<span class="asterisk">*</span></label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 control-label">Invoice Number :<span class="asterisk">*</span></label>
+            <div class="col-sm-7">
                 <input type="text" required name="invoice_no" id='invoice_no' class="form-control" value='<?php if (!empty($creditmemo)) echo $creditmemo->invoice_no; ?>' style="text-transform: uppercase;" />
             </div>
         </div>
-
         <div class="form-group">
-            <label class="col-sm-2 control-label">Invoice Date(English):<span class="asterisk">*</span></label>
-            <div class="col-sm-8">
-                <input type="text" required name="invoice_eng_date" id='invoice_eng_date' class="form-control" value='<?php if (!empty($creditmemo)) echo $creditmemo->invoice_eng_date; ?>' />
+            <label class="col-sm-3 control-label">Invoice Date (English):<span class="asterisk">*</span></label>
+            <div class="col-sm-7">
+                <input type="text" name="invoice_eng_date" id='invoice_eng_date' class="form-control" value='<?php if (!empty($creditmemo)) echo $creditmemo->invoice_eng_date; ?>' autocomplete="false" />
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">VAT Amount:</label>
-            <div class="col-sm-8">
+            <label class="col-sm-3 control-label">Invoice Date (Nepali):<span class="asterisk">*</span></label>
+            <div class="col-sm-7">
+                <input type="text" required name="invoice_nepali_date" id='invoice_nepali_date' class="form-control" value='<?php if (!empty($creditmemo)) echo $creditmemo->invoice_nepali_date; ?>' onchange="nepalidatechanged();" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">VAT Amount:</label>
+            <div class="col-sm-7">
                 <input type="text" name="vat_amount" id='vat_amount' class="form-control" value='<?php if (!empty($creditmemo)) echo $creditmemo->vat_amount; ?>' onkeyup="calculate_grandtotal();" />
             </div>
         </div>
-        <!-- <div class="form-group">
-            <label class="col-sm-2 control-label">Result :<span class="asterisk">*</span></label>
-            <div class="col-sm-8">
-                <input type="text" required name="result" id='result' class="form-control" value='' />
-            </div>
-        </div> -->
         <div class="form-group">
             <label class="col-sm-2 text-center">
                 Medicine Name<br>/<br>Company Name    
@@ -381,7 +380,28 @@ if (!empty($stock_detail)) {
             }
       });
 
+      $('#invoice_nepali_date').change(function(){
+        akert("Hello"); 
+      });
+
       $( "#invoice_eng_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
-      $( "#expiry_date1, #expiry_date2, #expiry_date3, #expiry_date4, #expiry_date5, #expiry_date6, #expiry_date7, #expiry_date8, #expiry_date9, #expiry_date10, #expiry_date11, #expiry_date12" ).datepicker({ dateFormat: 'yy-mm-dd' });
+      //$( "#expiry_date1, #expiry_date2, #expiry_date3, #expiry_date4, #expiry_date5, #expiry_date6, #expiry_date7, #expiry_date8, #expiry_date9, #expiry_date10, #expiry_date11, #expiry_date12" ).datepicker({ dateFormat: 'yy-mm-dd' });
+
+      /*$( "#invoice_nepali_date" ).change(function() {
+        alert( "Handler for .change() called." );
+      });*/
+
+      $('#invoice_nepali_date').change(function(){
+        alert('nepali date changed');
+        $('#invoice_eng_date').val(BS2AD($('#invoice_nepali_date').val()));
+      });
+
+      $('#invoice_eng_date').change(function(){
+        $('#invoice_nepali_date').val(AD2BS($('#invoice_eng_date').val()));
+      });
+
+      $('#invoice_nepali_date').nepaliDatePicker();
+
+
     });
   </script>

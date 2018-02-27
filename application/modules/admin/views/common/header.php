@@ -37,8 +37,8 @@
   <script src="<?php echo base_url();?>content_admin/extra/moment.min.js"></script>
   <link rel="stylesheet" href="<?php echo base_url();?>content_admin/extra/bootstrap-datetimepicker.min.css" />
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>content_admin/extra/jquery.fancybox.css" media="screen"/>
-<script type="text/javascript" src="<?php echo base_url();?>content_admin/extra/jquery.fancybox.pack.js"></script>
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>content_admin/extra/jquery.fancybox.css" media="screen"/>
+  <script type="text/javascript" src="<?php echo base_url();?>content_admin/extra/jquery.fancybox.pack.js"></script>
 
 <!-- jQuery UI -->
 <link href="<?php echo base_url();?>content_admin/plugins/jquery-ui/jquery-ui.css" rel="stylesheet" type="text/css" />
@@ -50,4 +50,10 @@
         return "<?php echo base_url(); ?>" + url;
     }
   </script>
+
+  <!-- Nepali Datepicker starts here -->
+  <script type="text/javascript" src="<?php echo base_url();?>content_admin/plugins/nepali.datepicker/nepali.datepicker.v2.2.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>content_admin/plugins/nepali.datepicker/nepali.datepicker.v2.2.min.css" />
+  <!-- Nepali Datepicker ends here -->
+
 </head>

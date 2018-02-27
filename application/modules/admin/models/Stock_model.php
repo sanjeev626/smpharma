@@ -104,22 +104,28 @@ class stock_model extends CI_Model {
     public function add_stock(){
         //Step 1 : Insert in tbl_creditmemo
         $invoice_eng_date = $this->input->post('invoice_eng_date');
-        $ied = explode('-',$invoice_eng_date);
+        $invoice_nepali_date = $this->input->post('invoice_nepali_date');
         //print_r($ied);
         $distributorname = $this->input->post('supplierName');
         $distributor_id = $this->general_model->getFieldValue('tbl_supplier', 'id', 'fullname', $distributorname);
-        $ind = $this->date_model->eng_to_nep($ied['0'],$ied['1'],$ied['2']);
-        $invoice_nepali_date = $ind['year'].'-'.$ind['month'].'-'.$ind['date'];
+        if(empty($invoice_eng_date))
+        {
+            $ind = explode('-',$invoice_nepali_date);
+            print_r($ind);
+            $ied = $this->date_model->nep_to_eng($ind['0'],$ind['1'],$ind['2']);            
+            print_r($ied);
+            $invoice_eng_date = $ied['year'].'-'.$ied['month'].'-'.$ied['date'];
+        }
         $data = array(
             'distributor_id' => $distributor_id,
             'invoice_no' => $this->input->post('invoice_no'),
-            'invoice_eng_date' => $this->input->post('invoice_eng_date'),
+            'invoice_eng_date' => $invoice_eng_date,
             'invoice_nepali_date' => $invoice_nepali_date,
             'total_amount' => $this->input->post('total_amount'),
             'discount_amount' => $this->input->post('discount_amount'),
             'vat_amount' => $this->input->post('vat_amount'),
             'grand_amount' => $this->input->post('grand_amount')
-        );        
+        );    
         $this->db->insert('tbl_creditmemo',$data);
         $crmemo_id = $this->db->insert_id();
         if($crmemo_id>0)

@@ -222,7 +222,7 @@ class Stock extends MY_Controller {
 
             $pid = $this->Stock_model->add_stock();
             $this->session->set_flashdata('success', 'Stock added Successfully...');
-            redirect(base_url() . 'admin/Stock/add', 'refresh');
+            //redirect(base_url() . 'admin/Stock/add', 'refresh');
         }
     }  
 
