@@ -188,7 +188,7 @@ if (!empty($stock_detail)) {
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-3 control-label">Invoice Date (English):<span class="asterisk">*</span></label>
+            <label class="col-sm-3 control-label">Invoice Date (English):</label>
             <div class="col-sm-7">
                 <input type="text" name="invoice_eng_date" id='invoice_eng_date' class="form-control" value='<?php if (!empty($creditmemo)) echo $creditmemo->invoice_eng_date; ?>' autocomplete="false" />
             </div>
