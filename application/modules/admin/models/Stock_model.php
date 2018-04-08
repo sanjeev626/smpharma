@@ -287,6 +287,22 @@ class stock_model extends CI_Model {
         }   
     }
 
+    function get_all_invoices($fromdate,$todate)
+    {        
+        $this->db->select('tbl_creditmemo.*,tbl_supplier.fullname');
+        $this->db->join('tbl_supplier', 'tbl_supplier.id = tbl_creditmemo.distributor_id', 'inner');
+        $this->db->where('invoice_nepali_date >=', $fromdate);
+        $this->db->where('invoice_nepali_date <=', $todate);
+        $this->db->order_by("id", "DESC");
+        $query = $this->db->get('tbl_creditmemo');  
+        //echo $this->db->last_query();
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        } 
+    }
+
     function getStockSupplier($distributor_id)
     {
         $this->db->select('tbl_stock.*,tbl_supplier.fullname,tbl_creditmemo.invoice_no,tbl_creditmemo.invoice_eng_date,tbl_creditmemo.invoice_nepali_date');

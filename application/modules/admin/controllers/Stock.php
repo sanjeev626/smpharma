@@ -319,6 +319,25 @@ class Stock extends MY_Controller {
 
     }
 
+    public function listallinvoices($fromdate,$todate){
+
+        /*if (!isset($fromdate))
+            redirect(base_url() . 'admin/Stock');
+
+        if (!is_numeric($fromdate))
+            redirect(base_url() . 'admin/Stock');*/
+
+        $data['title'] = '.:: List All Invoices ::.';
+        $data['page_header'] = 'List All Invoices ';
+        $data['page_header_icone'] = 'fa-product-hunt';
+        $data['nav'] = 'Stock';
+        $data['panel_title'] = 'List All Invoices  ';
+        $data['main'] = 'list_all_invoices';
+        $data['invoice_info'] = $this->Stock_model->get_all_invoices($fromdate,$todate);
+
+        $this->load->view('home', $data);
+    }
+
     function invoiceSearch()
     {
         $invoice_id = $this->uri->segment('4');
