@@ -319,7 +319,7 @@ class Stock extends MY_Controller {
 
     }
 
-    public function listallinvoices($fromdate,$todate){
+    public function listallinvoices($fromdate,$todate,$supplier_id){
 
         /*if (!isset($fromdate))
             redirect(base_url() . 'admin/Stock');
@@ -333,8 +333,31 @@ class Stock extends MY_Controller {
         $data['nav'] = 'Stock';
         $data['panel_title'] = 'List All Invoices  ';
         $data['main'] = 'list_all_invoices';
-        $data['invoice_info'] = $this->Stock_model->get_all_invoices($fromdate,$todate);
+        $data['invoice_date_from'] = $fromdate;
+        $data['invoice_date_to'] = $todate;
+        $data['supplier_id'] = $supplier_id;
+        $data['invoice_info'] = $this->Stock_model->get_all_invoices($fromdate,$todate,$supplier_id);
+        $data['supplier_list'] =$this->general_model->getAll('tbl_supplier','','fullname ASC','id,fullname'); 
+        $this->load->view('home', $data);
+    }
 
+    public function editInvoice($invoice_id){
+        $data['title'] = '.:: Edit Invoice ::.';
+        $data['page_header'] = 'Edit Invoice ';
+        $data['page_header_icone'] = 'fa-product-hunt';
+        $data['nav'] = 'Stock';
+        $data['panel_title'] = 'Edit Invoice  '; 
+        $order_by = 'fullname ASC'; 
+        
+        $where = "id='".$invoice_id."'";
+        $data['invoice_info'] = $invoice_info = $this->general_model->getAll('tbl_creditmemo',$where); 
+
+
+        $data['supplier_name'] = $this->general_model->getFieldValue('tbl_supplier', 'fullname', 'id', $invoice_info['0']->distributor_id); 
+
+        $where_stock = "creditmemo_id='".$invoice_id."'";
+        $data['stock_info'] =$this->general_model->getAll('tbl_stock',$where_stock); 
+        $data['main'] = 'invoice_edit';
         $this->load->view('home', $data);
     }
 
@@ -381,8 +404,6 @@ class Stock extends MY_Controller {
         $data['main'] = 'update_medicine_id';
         $this->load->view('home', $data);
     }
-
-
 
     function updateNewMedicineId()
     {

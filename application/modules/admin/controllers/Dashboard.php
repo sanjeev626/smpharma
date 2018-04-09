@@ -15,7 +15,6 @@ class Dashboard extends MY_Controller {
         parent::__construct();
 
         $this->load->model('general_model');
-
     }
 
    

@@ -111,9 +111,9 @@ class stock_model extends CI_Model {
         if(empty($invoice_eng_date))
         {
             $ind = explode('-',$invoice_nepali_date);
-            print_r($ind);
+            //print_r($ind);
             $ied = $this->date_model->nep_to_eng($ind['0'],$ind['1'],$ind['2']);            
-            print_r($ied);
+            //print_r($ied);
             $invoice_eng_date = $ied['year'].'-'.$ied['month'].'-'.$ied['date'];
         }
         $data = array(
@@ -287,13 +287,16 @@ class stock_model extends CI_Model {
         }   
     }
 
-    function get_all_invoices($fromdate,$todate)
+    function get_all_invoices($fromdate,$todate,$supplier_id)
     {        
         $this->db->select('tbl_creditmemo.*,tbl_supplier.fullname');
         $this->db->join('tbl_supplier', 'tbl_supplier.id = tbl_creditmemo.distributor_id', 'inner');
         $this->db->where('invoice_nepali_date >=', $fromdate);
         $this->db->where('invoice_nepali_date <=', $todate);
-        $this->db->order_by("id", "DESC");
+        if($supplier_id>0)
+            $this->db->where('distributor_id', $supplier_id);
+
+        $this->db->order_by("invoice_nepali_date", "ASC");
         $query = $this->db->get('tbl_creditmemo');  
         //echo $this->db->last_query();
         if ($query->num_rows() == 0) {

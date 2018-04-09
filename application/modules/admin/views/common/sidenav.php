@@ -1,3 +1,9 @@
+<?php
+$this->load->model('date_model');
+$nepDate_arr = $this->date_model->eng_to_nep(date('Y'),date('m'),date('d'));
+$fromNepDate = $nepDate_arr['year'].'-'.$nepDate_arr['month'].'-01';
+$toNepDate = $nepDate_arr['year'].'-'.$nepDate_arr['month'].'-'.$nepDate_arr['date'];
+?>
 <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -23,7 +29,7 @@
           <ul class="treeview-menu">
             <li class="<?php if($this->uri->segment(3) == 'add'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock/add"><i class="fa fa-circle-o"></i> Add Stock</a></li>
             <li class="<?php if($this->uri->segment(3) == ''){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock"><i class="fa fa-circle-o"></i> List All</a></li>
-            <li class="<?php if($this->uri->segment(3) == ''){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock/listallinvoices/2073-01-01/<?php echo date('Y-m-d');?>"><i class="fa fa-circle-o"></i> List All Invoices</a></li>
+            <li class="<?php if($this->uri->segment(3) == 'listallinvoices'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock/listallinvoices/<?php echo $fromNepDate;?>/<?php echo $toNepDate;?>/0"><i class="fa fa-circle-o"></i> List All Invoices</a></li>
             <li class="<?php if($this->uri->segment(3) == 'near_expiry'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock/near_expiry"><i class="fa fa-circle-o"></i> Near Expiry</a></li>
             <li class="<?php if($this->uri->segment(3) == 'expired'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/stock/expired"><i class="fa fa-circle-o"></i> Expired</a></li>
           </ul>
