@@ -22,7 +22,7 @@ if (!empty($medicine_detail)) {
         <div class="form-group">
             <label class="col-sm-3 control-label">Main Division: :<span class="asterisk">*</span></label>
             <div class="col-sm-7">
-                <select required class="form-control chosen-select" name='aid' data-placeholder="Choose Activity">
+                <select required class="form-control chosen-select" name='parent_company_id' data-placeholder="Choose Activity">
                     <option value='0'>Select One</option>
                     <?php foreach ($main_division as $key => $value) {?>
                     <option value='<?php echo $value->id; ?>' <?php if(!empty($medicine_detail) && $medicine_detail->parent_company_id == $value->id){ echo "selected='selected'"; } ?>><?php echo $value->fullname; ?></option>

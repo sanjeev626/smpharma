@@ -20,9 +20,10 @@ $toNepDate = $nepDate_arr['year'].'-'.$nepDate_arr['month'].'-'.$nepDate_arr['da
         <li class ="<?php if($nav == 'Supplier'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/Supplier"><i class="fa fa-buysellads "></i><span>SUPPLIER/DISTRIBUTOR</span></a></li>
         <li class ="<?php if($this->uri->segment(2) == 'medicine'){ echo 'active'; } ?>"><a href="javascript:void(0);"><i class="fa fa-medkit"></i><span>MEDICINE</span></a>
           <ul class="treeview-menu">
-            <li class="<?php if($this->uri->segment(2) == 'medicine'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/medicine"><i class="fa fa-circle-o"></i> List Medicine</a></li>
-            <li class="<?php if($this->uri->segment(3) == 'add'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/medicine/add"><i class="fa fa-circle-o"></i> Add Medicine</a></li>
-            <li class="<?php if($this->uri->segment(3) == 'merge_medicine'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/medicine/merge_medicine"><i class="fa fa-circle-o"></i> Merge Medicine</a></li>
+            <li class="<?php if($this->uri->segment(3) == ''){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/medicine"><i class="fa fa-circle-o"></i> List </a></li>
+            <li class="<?php if($this->uri->segment(3) == 'add'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/medicine/add"><i class="fa fa-circle-o"></i> Add </a></li>
+            <li class="<?php if($this->uri->segment(3) == 'search'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/medicine/search"><i class="fa fa-circle-o"></i> Search </a></li>
+            <li class="<?php if($this->uri->segment(3) == 'merge_medicine'){ echo 'active'; } ?>"><a href="<?php echo base_url(); ?>admin/medicine/merge_medicine"><i class="fa fa-circle-o"></i> Merge </a></li>
           </ul>
         </li>
         <li class ="<?php if($this->uri->segment(2) == 'stock'){ echo 'active'; } ?>"><a href="javascript:void(0);"><i class="fa fa-edit"></i><span>STOCK</span></a>

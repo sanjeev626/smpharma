@@ -112,6 +112,45 @@ class medicine_model extends CI_Model {
         return $data['fullname'];
     }
 
+    public function merge_medicine($correct_medicine_id,$wrong_medicine_id)
+    {
+        //UPDATE in tbl_order, tbl_orderreview, tbl_temporder
+        $data = array(
+            'medicine_id' => $correct_medicine_id,
+            'medicine_name' => $_POST['correct_name']
+        );        
+        $this->db->where('medicine_id',$wrong_medicine_id);
+        $this->db->update('tbl_order',$data);
+        $this->db->update('tbl_orderreview',$data);
+        $this->db->update('tbl_temporder',$data);
+
+        //UPDATE in tbl_stock
+        $data2 = array(
+            'medicine_id' => $correct_medicine_id,
+            'item_description' => $_POST['correct_name']
+        ); 
+        $this->db->where('medicine_id',$wrong_medicine_id);
+        $this->db->update('tbl_stock',$data2);
+
+        //DELETE from tbl_medicine
+        $this->delete_medicine($wrong_medicine_id);
+    }
+
+    function get_medicine_info($medicine_id){
+        $this->db->select('tbl_medicine.medicine_name,tbl_stock.stock,tbl_stock.sales,tbl_stock.cp_per_unit,tbl_stock.sp_per_unit,tbl_supplier.fullname,tbl_creditmemo.invoice_nepali_date,tbl_creditmemo.invoice_no');
+        $this->db->where('medicine_id',$medicine_id);
+        $this->db->join('tbl_medicine', 'tbl_medicine.id = tbl_stock.medicine_id');
+        $this->db->join(' tbl_creditmemo', ' tbl_creditmemo.id = tbl_stock.creditmemo_id');
+        $this->db->join('tbl_supplier', 'tbl_supplier.id = tbl_creditmemo.distributor_id');
+        $this->db->order_by('tbl_creditmemo.invoice_nepali_date','DESC');
+        $query = $this->db->get('tbl_stock');
+        if ($query->num_rows() == 0) {
+            return FALSE;
+        } else {
+            return $query->result();
+        }
+    }
+
     function get_medicine($q){
         $this->db->select('*');
         $this->db->like('medicine_name', $q,'after');
@@ -120,7 +159,24 @@ class medicine_model extends CI_Model {
           foreach ($query->result_array() as $row){
             $new_row['label']=htmlentities(stripslashes($row['medicine_name']));
             $new_row['value']=htmlentities(stripslashes($row['medicine_name']));
+            $new_row['medicine_id']=$row['id'];
             $new_row['the_link']=base_url()."admin/Medicine/edit/".$row['id'];
+            $row_set[] = $new_row; //build an array
+          }
+          echo json_encode($row_set); //format the array into json data
+        }
+    }
+
+    function search_medicine($q){
+        $this->db->select('*');
+        $this->db->like('medicine_name', $q,'after');
+        $query = $this->db->get('tbl_medicine');
+        if($query->num_rows() > 0){
+          foreach ($query->result_array() as $row){
+            $new_row['label']=htmlentities(stripslashes($row['medicine_name']));
+            $new_row['value']=htmlentities(stripslashes($row['medicine_name']));
+            $new_row['the_link']=base_url()."admin/medicine/search/".$row['id'];
+            $new_row['medicine_id']=$row['id'];
             $row_set[] = $new_row; //build an array
           }
           echo json_encode($row_set); //format the array into json data

@@ -183,10 +183,51 @@ class Medicine extends MY_Controller {
         }
     }
 
+    public function merge_medicine()
+    {        
+        $data['title'] = '.:: Merge Medicine ::.';
+        $data['page_header'] = 'Merge Medicine ';
+        $data['page_header_icone'] = 'fa-search';
+        $data['nav'] = 'Medicine';
+        $data['panel_title'] = 'Merge Medicine  ';
+        $data['main'] = 'medicine_merge';
+        //echo "lang = ".$this->session->lang;
+        if(isset($_POST['btnMerge']))
+        {
+            $this->Medicine_model->merge_medicine($_POST['correct_name_id'],$_POST['wrong_name_id']);
+            $this->session->set_flashdata('success', 'Medicine Merged Successfully...');
+            //redirect(base_url() . 'admin/medicine/merge_medicine/', 'refresh');
+        }
+        $this->load->view('home', $data);
+    }
+
+    public function search(){
+        $data['title'] = '.:: Search Medicine ::.';
+        $data['page_header'] = 'Search Medicine ';
+        $data['page_header_icone'] = 'fa-search';
+        $data['nav'] = 'Medicine';
+        $data['panel_title'] = 'Search Medicine  ';
+        $medicine_id = $this->uri->segment(4);
+        if(empty($medicine_id))
+            $medicine_id=0;
+        $data['medicine_id'] = $medicine_id;
+        $data['medicine_info'] =$this->Medicine_model->get_medicine_info($medicine_id); 
+        $data['main'] = 'medicine_search';
+        //echo "lang = ".$this->session->lang;
+        $this->load->view('home', $data);
+    }
+
     function get_medicines(){
         if (isset($_GET['term'])){
           $q = strtolower($_GET['term']);
           $this->Medicine_model->get_medicine($q);
+        }
+    }
+
+    function search_medicines(){
+        if (isset($_GET['term'])){
+          $q = strtolower($_GET['term']);
+          $this->Medicine_model->search_medicine($q);
         }
     }
 }
