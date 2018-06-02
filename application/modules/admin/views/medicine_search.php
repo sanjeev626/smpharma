@@ -16,10 +16,16 @@
               <thead>
                 <tr>
                   <th width="1%">Ordering</th>
-                  <th width="30%">Medicine Name </th>
-                  <th width="30%">Supplier</th>
-                  <th width="20%">Net Cost</th>
-                  <th width="19%" class="table-action text-center">Action</th>
+                  <th width="10%">Date</th>
+                  <th width="20%">Medicine Name </th>
+                  <th width="5%">Quantity </th>
+                  <th width="5%">Deal </th>
+                  <th width="5%">Deal Percentage</th>
+                  <th width="5%">Rate </th>
+                  <th width="20%">Supplier</th>
+                  <th width="15%">Net Cost</th>
+                  <th width="15%">Selling Price</th>
+                  <th width="4%" class="table-action text-center">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,15 +33,20 @@
                 if (!empty($medicine_info)) { 
                   $counter=0;
                   foreach ($medicine_info as $row):
-                    //print_r($key);
                   //echo $key->ordering;
                     ++$counter;
                     ?>
                   <tr>
                     <td><?php echo $counter; ?></td>
+                    <td><?php echo $row->invoice_nepali_date; ?></td>
                     <td><?php echo $row->medicine_name; ?></td>
+                    <td><?php echo $row->quantity; ?></td>
+                    <td><?php echo $row->deal; ?></td>
+                    <td><?php if($row->quantity>0) echo round($row->deal*100/$row->quantity,2).'%'; ?></td>
+                    <td><?php echo $row->rate; ?></td>
                     <td><?php echo $row->fullname; ?></td>
-                    <td><?php echo $row->cp_per_unit; ?></td>                    
+                    <td><?php echo $row->cp_per_unit; ?></td>  
+                    <td><?php echo $row->sp_per_unit; ?></td>                    
                     <td class="table-action text-center"></td>
                   </tr>
                   <?php
