@@ -75,16 +75,17 @@
                   <?php foreach ($groups as $group):?>
               <label class="checkbox col-sm-2 control-label">
               <?php
-                  $gID=$group['id'];
-                  $checked = null;
-                  $item = null;
-                  foreach($currentGroups as $grp) {
-                      if ($gID == $grp->id) {
-                          $checked= ' checked="checked"';
-                          $readonly = 'disabled="disabled"';
-                      break;
-                      }
-                  }
+                $readonly='';
+                $gID=$group['id'];
+                $checked = null;
+                $item = null;
+                foreach($currentGroups as $grp) {
+                    if ($gID == $grp->id) {
+                        $checked= ' checked="checked"';
+                        $readonly = 'disabled="disabled"';
+                    break;
+                    }
+                }
               ?>
               <input <?php echo $readonly;?> type="checkbox" name="groups[]" value="<?php echo $group['id'];?>"<?php echo $checked;?>>
               <?php echo htmlspecialchars($group['name'],ENT_QUOTES,'UTF-8');?>
