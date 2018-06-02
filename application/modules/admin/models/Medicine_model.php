@@ -137,7 +137,7 @@ class medicine_model extends CI_Model {
     }
 
     function get_medicine_info($medicine_id){
-        $this->db->select('tbl_medicine.medicine_name,tbl_stock.stock,tbl_stock.sales,tbl_stock.cp_per_unit,tbl_stock.sp_per_unit,tbl_stock.quantity,tbl_stock.deal,tbl_stock.rate,tbl_stock.deal_percentage,tbl_supplier.fullname,tbl_creditmemo.invoice_nepali_date,tbl_creditmemo.invoice_no');
+        $this->db->select('tbl_medicine.medicine_name,tbl_stock.stock,tbl_stock.sales,tbl_stock.cp_per_unit,tbl_stock.sp_per_unit,tbl_stock.quantity,tbl_stock.deal,tbl_stock.rate,tbl_stock.deal_percentage,tbl_stock.stock,tbl_stock.sales,tbl_supplier.fullname,tbl_creditmemo.invoice_nepali_date,tbl_creditmemo.invoice_no');
         $this->db->where('medicine_id',$medicine_id);
         $this->db->join('tbl_medicine', 'tbl_medicine.id = tbl_stock.medicine_id');
         $this->db->join(' tbl_creditmemo', ' tbl_creditmemo.id = tbl_stock.creditmemo_id');
