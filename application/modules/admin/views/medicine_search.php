@@ -33,10 +33,15 @@
               <tbody>
                 <?php
                 if (!empty($medicine_info)) { 
+                  $distributor_arr = array();
+                  $distributor_name = array();
+                  $distributor_cost = array();
                   $counter=0;
                   foreach ($medicine_info as $row):
                   //echo $key->ordering;
                     ++$counter;
+                  $percentage_discount = round($row->discount_amount*100/$row->total_amount,2);
+                  $net_cost = round($row->cp_per_unit-$percentage_discount*$row->cp_per_unit/100,2);
                     ?>
                   <tr>
                     <td><?php echo $counter; ?></td>
@@ -48,12 +53,16 @@
                     <td><?php if($row->quantity>0) echo round($row->deal*100/$row->quantity,2).'%'; ?></td>
                     <td><?php echo $row->rate; ?></td>
                     <td><?php echo $row->fullname; ?></td>
-                    <td><?php echo $row->cp_per_unit; ?></td>  
+                    <td><?php echo $net_cost; ?></td>  
                     <td><?php echo $row->sp_per_unit; ?></td>
                     <td><?php echo $row->stock; ?></td>
                     <td><?php echo $row->sales; ?></td>
                   </tr>
                   <?php
+                  //if(!in_array($row->fullname,$distributor_name))
+                  {
+                    $distributor_arr[] = array('distributor_name'=>$row->fullname,'distributor_cost'=>$net_cost,'address'=>$row->address,'landline'=>$row->landline,'mobile'=>$row->mobile,'invoice_nepali_date'=>$row->invoice_nepali_date);
+                  }
                   endforeach;
                 } else {
                   ?>
@@ -61,6 +70,54 @@
                     <td colspan="8"><center>No Medicine Found !!!</center></td>
                   </tr>
                   <?php } ?>
+                  <tr>
+                    <td colspan="13">
+                      <strong>Order Hirarchy</strong><br>
+                      <?php
+                      //asort($distributor_arr);
+                      //print_r($distributor_name);
+                      //print_r($distributor_arr);
+                      foreach ($distributor_arr as $key => $row) {
+                          $distributor_cost[$key] = $row['distributor_cost'];
+                      }
+
+                      // Sort the data with volume descending, edition ascending
+                      // Add $data as the last parameter, to sort by the common key
+                      array_multisort($distributor_cost, SORT_ASC, $distributor_arr);
+                      //print_r($distributor_arr);
+                      ?>
+                      <table class="table table-hover" id="table1" cellspacing="0" width="100%">
+                        <tr>
+                          <th width="1%">Priority</th>
+                          <th width="10%">Date</th>
+                          <th width="20%">Distributor</th>
+                          <th width="5%">Cost</th>
+                          <th width="20%">Address</th>
+                          <th width="20%">Contact</th>
+                          <th width="10%">Mobile </th>
+                        </tr>
+                      <?php
+                      foreach ($distributor_arr as $key => $row) {
+                          $n = $key+1;
+                      ?>
+                        <tr>
+                          <td><?php echo $n;?></td>
+                          <td><?php echo $row['invoice_nepali_date'];?></td>
+                          <td><?php echo $row['distributor_name'];?></td>
+                          <td><?php echo $row['distributor_cost'];?></td>
+                          <td><?php echo $row['address'];?></td>
+                          <td><?php echo $row['landline'];?></td>
+                          <td><?php if($row['mobile']>0) echo $row['mobile'];?></td>
+                        </tr>
+                      <?php
+                      }
+                      /*for($i=0; $i<count($distributor_arr); $i++) {
+                        echo $distributor_arr['distributor_name'][$i].' -->'.$distributor_arr['distributor_cost'][$i].'<br>';
+                      }*/
+                      ?>
+                    </table>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div><!-- table-responsive -->
